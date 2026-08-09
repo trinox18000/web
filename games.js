@@ -23,9 +23,31 @@ const gamesData = [
 ];
 
 // PARAMÈTRES DE PAGINATION
-const ITEMS_PER_PAGE = 12; // Nombre de jeux par page
+const ITEMS_PER_PAGE = 12;
 let currentPage = 1;
 let currentFilteredGames = [...gamesData];
+
+// ÉCOUTEURS D'ÉVÉNEMENTS (RECHERCHE ET FILTRES)
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById('searchInput');
+    
+    // Filtre dynamique avec la barre de recherche
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            currentFilteredGames = gamesData.filter(game => 
+                game.title.toLowerCase().includes(query) || 
+                game.searchData.toLowerCase().includes(query) ||
+                game.tag.toLowerCase().includes(query)
+            );
+            currentPage = 1;
+            renderGames();
+        });
+    }
+
+    // Premier rendu au chargement
+    renderGames();
+});
 
 // GÉNÉRATION DES CARTES DANS LE DOM
 function renderGames() {
@@ -43,11 +65,11 @@ function renderGames() {
         container.innerHTML = gamesToShow.map(game => `
             <a href="${game.url}" class="game-card" data-style="${game.styleData}" data-name="${game.searchData}">
                 <div class="media-container">
-                    <img src="${game.image}" alt="${game.title}" loading="lazy">
+                    <img src="${game.image}" alt="${escapeHtml(game.title)}" loading="lazy">
                 </div>
-                <h3>${game.title}</h3>
-                <p class="description">${game.description}</p>
-                <span class="tag-style">${game.tag}</span>
+                <h3>${escapeHtml(game.title)}</h3>
+                <p class="description">${escapeHtml(game.description)}</p>
+                <span class="tag-style">${escapeHtml(game.tag)}</span>
             </a>
         `).join('');
     }
@@ -57,19 +79,20 @@ function renderGames() {
 
 // CRÉATION DES BOUTONS DE PAGINATION EN BAS DE PAGE
 function renderPaginationControls() {
+    const gamesContainer = document.getElementById('gamesContainer');
+    if (!gamesContainer) return;
+
     let paginationContainer = document.getElementById('paginationControls');
     
-    // Si le conteneur n'existe pas encore, on le crée après le bloc des jeux
     if (!paginationContainer) {
         paginationContainer = document.createElement('div');
         paginationContainer.id = 'paginationControls';
         paginationContainer.className = 'pagination-container';
-        document.getElementById('gamesContainer').after(paginationContainer);
+        gamesContainer.after(paginationContainer);
     }
 
     const totalPages = Math.ceil(currentFilteredGames.length / ITEMS_PER_PAGE);
 
-    // Si tout rentre sur une seule page ou qu'on est sur l'accueil, on ne montre pas la pagination
     if (totalPages <= 1) {
         paginationContainer.innerHTML = '';
         return;
@@ -93,5 +116,13 @@ function goToPage(pageNumber) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Premier rendu
-renderGames();
+// FILTRAGE PAR CATEGORIE / TAG
+function filterByStyle(style) {
+    if (style === 'all') {
+        currentFilteredGames = [...gamesData];
+    } else {
+        currentFilteredGames = gamesData.filter(game => game.styleData.includes(style));
+    }
+    currentPage = 1;
+    renderGames();
+}

@@ -4,18 +4,20 @@ let isAdminMode = false;
 
 // Exécuté automatiquement dès que la page est chargée
 document.addEventListener("DOMContentLoaded", function() {
-    // Initialisation d'EmailJS avec ta vraie Public Key
+    // Initialisation d'EmailJS
     emailjs.init({
         publicKey: "_KJIQgzKnZEuNb72R",
     });
 
-    // Crée automatiquement le bouton admin discret en bas de page
+    // Bouton admin global (Optionnel : retire ces 5 lignes si tes HTML ont déjà un bouton admin)
     const adminTriggerContainer = document.createElement('div');
     adminTriggerContainer.classList.add('admin-trigger');
     adminTriggerContainer.innerHTML = `<button onclick="toggleAdminMode()">🔐 Connexion Admin</button>`;
-    
     const container = document.querySelector('.site-container') || document.body;
     container.appendChild(adminTriggerContainer);
+
+    // Charge les commentaires si on est sur la page d'accueil
+    renderRecentComments();
 });
 
 // Fonction pour basculer le mode admin
@@ -38,48 +40,93 @@ function toggleAdminMode() {
 
 function scrollCarousel(id, distance) {
     const track = document.getElementById(id);
-    track.scrollBy({ left: distance, behavior: 'smooth' });
+    if (track) {
+        track.scrollBy({ left: distance, behavior: 'smooth' });
+    }
 }
 
-function addComment(event) {
-    event.preventDefault(); // Empêche la page de se recharger
+// Fonction pour ajouter un commentaire
+function addComment(event, gameTitle = "Jeu", gameUrl = "#") {
+    event.preventDefault();
 
     const authorInput = document.getElementById('commentAuthor');
     const textInput = document.getElementById('commentText');
     const commentsList = document.getElementById('commentsList');
 
+    if (!authorInput || !textInput) return;
     if (authorInput.value.trim() === '' || textInput.value.trim() === '') return;
 
-    // 1. Affiche le commentaire sur la page
-    const commentItem = document.createElement('div');
-    commentItem.classList.add('comment-item');
+    const author = authorInput.value.trim();
+    const text = textInput.value.trim();
 
-    commentItem.innerHTML = `
-        <div class="comment-header">
-            <strong>${escapeHtml(authorInput.value)}</strong>
-            <button class="btn-delete" onclick="this.closest('.comment-item').remove()">❌ Supprimer</button>
-        </div>
-        <p>${escapeHtml(textInput.value)}</p>
-    `;
+    // 1. Affiche le commentaire sur la page du jeu
+    if (commentsList) {
+        const commentItem = document.createElement('div');
+        commentItem.classList.add('comment-item');
 
-    commentsList.prepend(commentItem);
+        commentItem.innerHTML = `
+            <div class="comment-header">
+                <strong>${escapeHtml(author)}</strong>
+                <button class="btn-delete" onclick="this.closest('.comment-item').remove()">❌ Supprimer</button>
+            </div>
+            <p>${escapeHtml(text)}</p>
+        `;
 
-    // 2. Envoie l'e-mail de notification via EmailJS avec ton Service ID et ton Template ID
+        commentsList.prepend(commentItem);
+    }
+
+    // 2. Sauvegarde dans LocalStorage pour l'accueil
+    const newComment = {
+        author: author,
+        text: text,
+        gameTitle: gameTitle,
+        gameUrl: gameUrl,
+        date: new Date().toLocaleDateString('fr-FR')
+    };
+
+    let comments = JSON.parse(localStorage.getItem('siteComments')) || [];
+    comments.unshift(newComment);
+    localStorage.setItem('siteComments', JSON.stringify(comments.slice(0, 10))); // Conserve les 10 derniers
+
+    // 3. Notification EmailJS
     emailjs.send("service_5dyx1td", "template_s3bbiv5", {
-        name: authorInput.value,
-        message: textInput.value
+        name: author,
+        message: `${gameTitle} : ${text}`
     }).then(function() {
         console.log("E-mail de notification envoyé avec succès !");
     }, function(error) {
         console.log("Erreur lors de l'envoi de l'e-mail...", error);
     });
 
-    // Vide les champs du formulaire
+    // Reinitialise le formulaire
     authorInput.value = '';
     textInput.value = '';
 }
 
-// Petite fonction de sécurité pour éviter les failles HTML/JS dans les commentaires
+// Fonction pour afficher les commentaires sur la page d'accueil
+function renderRecentComments() {
+    const commentsContainer = document.getElementById('recentCommentsContainer');
+    if (!commentsContainer) return;
+
+    const comments = JSON.parse(localStorage.getItem('siteComments')) || [];
+
+    if (comments.length === 0) {
+        commentsContainer.innerHTML = `<p style="color: #8b949e; grid-column: 1/-1; text-align: center;">Aucun commentaire pour le moment.</p>`;
+        return;
+    }
+
+    commentsContainer.innerHTML = comments.map(comment => `
+        <div class="comment-card">
+            <div>
+                <strong>${escapeHtml(comment.author)}</strong> sur <a href="${comment.gameUrl}">${escapeHtml(comment.gameTitle)}</a>
+                <p>"${escapeHtml(comment.text)}"</p>
+            </div>
+            <small>Le ${comment.date}</small>
+        </div>
+    `).join('');
+}
+
+// Protection XSS
 function escapeHtml(text) {
     const map = {
         '&': '&amp;',

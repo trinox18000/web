@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stalker 2 : Heart of Chornobyl</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Ajout de ../ pour le style CSS -->
+    <link rel="stylesheet" href="../style.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
@@ -12,7 +13,7 @@
     <div class="site-container">
         <main>
             <section class="game-details-page">
-                <a href="index.html" class="back-btn">← Retour</a>
+                <a href="../index.html" class="back-btn">← Retour</a>
                 
                 <h2>Stalker 2 : Heart of Chornobyl</h2>
                 
@@ -28,9 +29,10 @@
                     <div class="carousel-container">
                         <button class="carousel-btn prev-btn" onclick="scrollCarousel('imagesScroll', -600)">❮</button>
                         <div class="carousel-track" id="imagesScroll">
-                            <img src="assets/stalker2/images/cover.jpg" alt="Cover">
-                            <img src="assets/stalker2/images/screenshot-1.jpg" alt="Screenshot 1">
-                            <img src="assets/stalker2/images/screenshot-2.jpg" alt="Screenshot 2">
+                            <!-- Ajout de ../ pour accéder aux images du dossier assets -->
+                            <img src="../assets/stalker2/images/cover.jpg" alt="Cover">
+                            <img src="../assets/stalker2/images/screenshot-1.jpg" alt="Screenshot 1">
+                            <img src="../assets/stalker2/images/screenshot-2.jpg" alt="Screenshot 2">
                         </div>
                         <button class="carousel-btn next-btn" onclick="scrollCarousel('imagesScroll', 600)">❯</button>
                     </div>
@@ -44,13 +46,14 @@
                         <div class="carousel-track" id="videosScroll">
                             <div class="carousel-video-item">
                                 <video controls>
-                                    <source src="assets/stalker2/videos/trailer.mp4" type="video/mp4">
-                                    <track src="assets/stalker2/videos/stalker2 traileur .vtt" kind="subtitles" srclang="fr" label="Français" default>
+                                    <!-- Ajout de ../ pour les vidéos et sous-titres -->
+                                    <source src="../assets/stalker2/videos/trailer.mp4" type="video/mp4">
+                                    <track src="../assets/stalker2/videos/stalker2 traileur .vtt" kind="subtitles" srclang="fr" label="Français" default>
                                 </video>
                             </div>
                             <div class="carousel-video-item">
                                 <video controls>
-                                    <source src="assets/stalker2/videos/gameplay.mp4" type="video/mp4">
+                                    <source src="../assets/stalker2/videos/gameplay.mp4" type="video/mp4">
                                 </video>
                             </div>
                         </div>
@@ -65,15 +68,20 @@
                         <a href="https://systemreqs.com/fr/jeu/stalker-2" target="_blank" class="btn-system">Vérifier ma configuration sur SystemReqs</a>
                     </div>
 
-                    <a href="ton-lien-vers-le-jeu" class="btn-download-big">Télécharger le jeu</a>
-                </div>
+				<h3>Télécharger le jeu :</h3>
+				<div class="download-options">
+					<a href="https://1fichier.com/?ruw759w6qbyec7ttgzwi" target="_blank" class="btn-download">1FICHIER</a>
+					<a href="https://gofile.io/d/OutU7Q" target="_blank" class="btn-download">GOFILE</a>
+					<a href="https://vikingfile.com/f/fGXYZ5GfEE" target="_blank" class="btn-download">VIKINGFILE</a>
+				</div>
+			</div>
 
                 <!-- 5. SECTION COMMENTAIRES -->
                 <div class="comments-section">
                     <h3>Mets un commentaire</h3>
                     
                     <!-- Formulaire pour poster un commentaire -->
-                    <form class="comment-form" onsubmit="addComment(event)">
+                    <form class="comment-form" onsubmit="addComment(event, 'Stalker 2', 'pages jeux/stalker2.html')">
                         <input type="text" id="commentAuthor" placeholder="Votre pseudo" required>
                         <textarea id="commentText" placeholder="Écrire un commentaire..." rows="3" required></textarea>
                         <button type="submit" class="btn-comment">Publier</button>
@@ -89,6 +97,7 @@
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Ajout de ../ pour le fichier JS -->
+    <script src="../script.js"></script>
 </body>
 </html>

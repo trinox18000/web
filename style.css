@@ -578,3 +578,82 @@ body.admin-logged-in .comment-item .btn-delete {
     border-color: #2e9d43;
     color: #ffffff;
 }
+
+/* --- STYLE SECTION DERNIERS COMMENTAIRES (Accueil) --- */
+.recent-comments-section {
+    max-width: 1000px;
+    margin: 40px auto 0 auto;
+    background: #161b22;
+    border: 1px solid #30363d;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.recent-comments-section h2 {
+    color: #58a6ff;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.recent-comments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.comment-card {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.comment-card a {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.comment-card a:hover {
+    text-decoration: underline;
+}
+
+.comment-card p {
+    color: #c9d1d9;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+.comment-card small {
+    color: #8b949e;
+}
+
+/* --- STYLE DES 3 BOUTONS DE TÉLÉCHARGEMENT --- */
+.download-options {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.btn-download {
+    background-color: #238636;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.3s;
+    border: 1px solid #1a6627;
+}
+
+.btn-download:hover {
+    background-color: #2ea043;
+}
