@@ -108,6 +108,7 @@ header h1 {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
+    margin-top: 35px; /* Ajoute un bel espace bien aéré ici */
 }
 
 .game-card {
@@ -244,4 +245,7 @@ header h1 {
 
 .alpha-games-row .game-card {
     width: 280px;
+}
+#alphaWelcomeMsg {
+    margin-top: 35px;
 }
