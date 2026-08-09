@@ -1,17 +1,105 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Accueil - Mes jeux</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Site de Démos de Jeux</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Bienvenue sur ma collection de jeux !</h1>
-  <nav>
-    <a href="index.html">Accueil</a> |
-    <a href="jeux.html">Jeux</a> |
-    <a href="contact.html">Contact</a>
-  </nav>
-  <p>Découvrez mes jeux créés maison et testez-les gratuitement !</p>
+
+    <!-- En-tête avec la barre de recherche -->
+    <header>
+        <h1>MonSiteDeJeux</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Rechercher un jeu..." onkeyup="filterGames()">
+        </div>
+    </header>
+
+    <!-- Menu des Catégories -->
+    <nav class="category-menu">
+        <button class="filter-btn active" onclick="filterCategory('all')">Tous</button>
+        <button class="filter-btn" onclick="filterCategory('action')">Action</button>
+        <button class="filter-btn" onclick="filterCategory('survival')">Survie</button>
+        <button class="filter-btn" onclick="filterCategory('cars')">Voiture / Course</button>
+        <button class="filter-btn" onclick="filterCategory('rpg')">RPG</button>
+        <button class="filter-btn" onclick="filterCategory('fps')">FPS</button>
+        <button class="filter-btn" onclick="filterCategory('strategy')">Stratégie</button>
+        <button class="filter-btn" onclick="filterCategory('simulation')">Simulation</button>
+        <button class="filter-btn" onclick="filterCategory('horror')">Horreur</button>
+        <button class="filter-btn" onclick="filterCategory('sport')">Sport</button>
+        <button class="filter-btn" onclick="filterCategory('indie')">Indépendant</button>
+    </nav>
+
+    <!-- Liste des Jeux -->
+    <main>
+        <section class="games-grid" id="gamesContainer">
+
+            <!-- Jeu 1 : Survie -->
+            <article class="game-card" data-category="survival" data-name="nom du jeu de survie zend">
+                <h3>Nom du Jeu de Survie (Démo)</h3>
+                <p class="description">Une courte description du jeu de survie.</p>
+                <div class="media-container">
+                    <img src="images/jeu1-cover.jpg" alt="Aperçu du jeu" width="300">
+                </div>
+                <div class="download-section">
+                    <a href="LIEN_TELECHARGEMENT" class="btn-download" target="_blank">Télécharger la démo</a>
+                </div>
+            </article>
+
+            <!-- Jeu 2 : Voiture -->
+            <article class="game-card" data-category="cars" data-name="super course auto">
+                <h3>Super Course Auto (Démo)</h3>
+                <p class="description">Un jeu de course de voiture arcade ultra rapide.</p>
+                <div class="media-container">
+                    <img src="images/jeu2-cover.jpg" alt="Aperçu du jeu" width="300">
+                </div>
+                <div class="download-section">
+                    <a href="LIEN_TELECHARGEMENT" class="btn-download" target="_blank">Télécharger la démo</a>
+                </div>
+            </article>
+
+            <!-- Ajoute d'autres jeux ici en modifiant data-category et data-name -->
+
+        </section>
+    </main>
+
+    <!-- Script JavaScript pour la Recherche et les Filtres -->
+    <script>
+        // Fonction pour filtrer par catégorie
+        function filterCategory(category) {
+            const cards = document.querySelectorAll('.game-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Change la couleur du bouton actif
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Affiche ou cache les cartes selon la catégorie
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Fonction pour la barre de recherche
+        function filterGames() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.game-card');
+
+            cards.forEach(card => {
+                let name = card.dataset.name.toLowerCase();
+                if (name.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>
