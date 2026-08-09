@@ -1,3 +1,4 @@
+/* --- STRUCTURE GLOBALE --- */
 * {
     box-sizing: border-box;
 }
@@ -10,10 +11,24 @@ body {
     padding: 0;
 }
 
+/* NOUVEAU : Enveloppe globale pour centrer les bannières et le site */
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 1760px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
 .site-container {
+    flex-grow: 1;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 30px 20px;
+    padding: 30px 0;
 }
 
 /* En-tête centré */
@@ -656,4 +671,37 @@ body.admin-logged-in .comment-item .btn-delete {
 
 .btn-download:hover {
     background-color: #2ea043;
+}
+
+/* --- STYLE DES BANNIÈRES LATÉRALES (Intégré) --- */
+.side-banner {
+    width: 160px;
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+    margin-top: 30px;
+}
+
+.side-banner img,
+.side-banner iframe,
+.side-banner div {
+    width: 100%;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: 1px solid #30363d;
+}
+
+.side-banner img:hover {
+    transform: scale(1.02);
+    border-color: #58a6ff;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+@media (max-width: 1350px) {
+    .side-banner {
+        display: none;
+    }
 }

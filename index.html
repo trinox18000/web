@@ -10,67 +10,89 @@
 </head>
 <body>
 
-    <div class="site-container">
+    <!-- CONTENEUR GLOBAL EN 3 COLONNES (Bannière gauche | Site | Bannière droite) -->
+    <div class="page-wrapper">
         
-        <!-- En-tête -->
-        <header class="banner-header">
-            <a href="index.html">
-                <img src="assets/logo site/images/logo-trinox.png" alt="Trinox Project Games" class="banner-img">
+        <!-- BANNIÈRE GAUCHE -->
+        <aside class="side-banner">
+            <!-- Remplace le lien et l'image par ta bannière verticale -->
+            <a href="https://www.instant-gaming.com/fr/...?igr=TRINOX18" target="_blank">
+                <img src="assets/logo site/images/ta-banniere-verticale.jpg" alt="Instant Gaming Partenaire">
             </a>
-        </header>
+        </aside>
 
-        <!-- MENU PRINCIPAL (Accueil + Jeux PC) -->
-        <nav class="main-menu" style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <button class="main-btn active" id="accueilBtn" onclick="showAccueil()">🏠 Accueil</button>
-            <button class="main-btn" id="jeuxPcBtn" onclick="showJeuxPC()">Jeux PC 🎮</button>
-        </nav>
+        <!-- CONTENU CENTRAL DE TON SITE -->
+        <div class="site-container" style="flex-grow: 1; max-width: 1400px; margin: 0;">
+            
+            <!-- En-tête -->
+            <header class="banner-header">
+                <a href="index.html">
+                    <img src="assets/logo site/images/logo-trinox.png" alt="Trinox Project Games" class="banner-img">
+                </a>
+            </header>
 
-        <!-- SOUS-MENU (Caché par défaut) -->
-        <div class="sub-menu-container" id="subMenuContainer" style="display: none;">
-            <div class="mode-selectors">
-                <button class="mode-btn active" onclick="setBrowseMode('style')">Par Style</button>
-                <button class="mode-btn" onclick="setBrowseMode('alpha')">Par Ordre Alphabétique (A-Z)</button>
+            <!-- MENU PRINCIPAL (Accueil + Jeux PC) -->
+            <nav class="main-menu" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button class="main-btn active" id="accueilBtn" onclick="showAccueil()">🏠 Accueil</button>
+                <button class="main-btn" id="jeuxPcBtn" onclick="showJeuxPC()">Jeux PC 🎮</button>
+            </nav>
+
+            <!-- SOUS-MENU (Caché par défaut) -->
+            <div class="sub-menu-container" id="subMenuContainer" style="display: none;">
+                <div class="mode-selectors">
+                    <button class="mode-btn active" onclick="setBrowseMode('style')">Par Style</button>
+                    <button class="mode-btn" onclick="setBrowseMode('alpha')">Par Ordre Alphabétique (A-Z)</button>
+                </div>
+
+                <!-- Liste des Styles -->
+                <div id="styleFilters" class="filter-row">
+                    <button class="filter-btn active" onclick="filterByStyle('all', event)">Tous</button>
+                    <button class="filter-btn" onclick="filterByStyle('survival', event)">Survie</button>
+                    <button class="filter-btn" onclick="filterByStyle('fps', event)">FPS / TPS</button>
+                    <button class="filter-btn" onclick="filterByStyle('action', event)">Action</button>
+                    <button class="filter-btn" onclick="filterByStyle('adventure', event)">Aventure</button>
+                    <button class="filter-btn" onclick="filterByStyle('rpg', event)">RPG</button>
+                    <button class="filter-btn" onclick="filterByStyle('cars', event)">Voiture / Course</button>
+                    <button class="filter-btn" onclick="filterByStyle('simulation', event)">Simulation</button>
+                    <button class="filter-btn" onclick="filterByStyle('strategy', event)">Stratégie</button>
+                    <button class="filter-btn" onclick="filterByStyle('horror', event)">Horreur</button>
+                    <button class="filter-btn" onclick="filterByStyle('roguelike', event)">Rogue-like</button>
+                </div>
+
+                <!-- Liste Alphabétique (A-Z) -->
+                <div id="alphaFilters" class="filter-row" style="display: none; flex-wrap: wrap;">
+                    <button class="filter-btn active" onclick="filterByLetter('all', event)">Tous</button>
+                    <script>
+                        const letters = "abcdefghijklmnopqrstuvwxyz".split("");
+                        letters.forEach(l => {
+                            document.write(`<button class="filter-btn" onclick="filterByLetter('${l}', event)">${l.toUpperCase()}</button>`);
+                        });
+                    </script>
+                </div>
             </div>
 
-            <!-- Liste des Styles -->
-            <div id="styleFilters" class="filter-row">
-                <button class="filter-btn active" onclick="filterByStyle('all', event)">Tous</button>
-                <button class="filter-btn" onclick="filterByStyle('survival', event)">Survie</button>
-                <button class="filter-btn" onclick="filterByStyle('fps', event)">FPS / TPS</button>
-                <button class="filter-btn" onclick="filterByStyle('action', event)">Action</button>
-                <button class="filter-btn" onclick="filterByStyle('adventure', event)">Aventure</button>
-                <button class="filter-btn" onclick="filterByStyle('rpg', event)">RPG</button>
-                <button class="filter-btn" onclick="filterByStyle('cars', event)">Voiture / Course</button>
-                <button class="filter-btn" onclick="filterByStyle('simulation', event)">Simulation</button>
-                <button class="filter-btn" onclick="filterByStyle('strategy', event)">Stratégie</button>
-                <button class="filter-btn" onclick="filterByStyle('horror', event)">Horreur</button>
-                <button class="filter-btn" onclick="filterByStyle('roguelike', event)">Rogue-like</button>
-            </div>
+            <!-- CONTENU : LISTE DES JEUX GENEREE PAR GAMES.JS -->
+            <main>
+                <section class="games-grid" id="gamesContainer">
+                    <!-- Les cartes sont générées automatiquement par games.js ! -->
+                </section>
+            </main>
 
-            <!-- Liste Alphabétique (A-Z) -->
-            <div id="alphaFilters" class="filter-row" style="display: none; flex-wrap: wrap;">
-                <button class="filter-btn active" onclick="filterByLetter('all', event)">Tous</button>
-                <script>
-                    const letters = "abcdefghijklmnopqrstuvwxyz".split("");
-                    letters.forEach(l => {
-                        document.write(`<button class="filter-btn" onclick="filterByLetter('${l}', event)">${l.toUpperCase()}</button>`);
-                    });
-                </script>
-            </div>
+            <!-- SECTION DES DERNIERS COMMENTAIRES -->
+            <section class="recent-comments-section" style="margin-top: 40px;">
+                <h2>💬 Derniers commentaires</h2>
+                <div id="recentCommentsContainer" class="recent-comments-grid"></div>
+            </section>
+
         </div>
 
-        <!-- CONTENU : LISTE DES JEUX GENEREE PAR GAMES.JS -->
-        <main>
-            <section class="games-grid" id="gamesContainer">
-                <!-- Les cartes sont générées automatiquement par games.js ! -->
-            </section>
-        </main>
-
-        <!-- SECTION DES DERNIERS COMMENTAIRES -->
-        <section class="recent-comments-section" style="margin-top: 40px;">
-            <h2>💬 Derniers commentaires</h2>
-            <div id="recentCommentsContainer" class="recent-comments-grid"></div>
-        </section>
+        <!-- BANNIÈRE DROITE -->
+        <aside class="side-banner">
+            <!-- Remplace le lien et l'image par ta bannière verticale -->
+            <a href="https://www.instant-gaming.com/fr/...?igr=TRINOX18" target="_blank">
+                <img src="assets/logo site/images/ta-banniere-verticale.jpg" alt="Instant Gaming Partenaire">
+            </a>
+        </aside>
 
     </div>
 
