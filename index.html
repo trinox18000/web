@@ -12,18 +12,18 @@
         
         <!-- En-tête -->
         <header>
-            <h1 onclick="showHome()" style="cursor: pointer;">MonSiteDeJeux</h1>
+            <h1 onclick="showHome()">MonSiteDeJeux</h1>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Rechercher un jeu..." onkeyup="filterGamesBySearch()">
             </div>
         </header>
 
-        <!-- MENU PRINCIPAL -->
+        <!-- MENU PRINCIPAL (Jeux PC) -->
         <nav class="main-menu">
-            <button class="main-btn active" onclick="switchMenu('pc')">Jeux PC</button>
+            <button class="main-btn" id="mainPcBtn" onclick="togglePcMenu()">Jeux PC 🎮</button>
         </nav>
 
-        <!-- SOUS-MENU (Style ou Alphabétique) -->
+        <!-- SOUS-MENU (Caché au départ, s'ouvre quand on clique sur Jeux PC) -->
         <div class="sub-menu-container" id="subMenuContainer">
             <div class="mode-selectors">
                 <button class="mode-btn active" onclick="setBrowseMode('style')">Par Style</button>
@@ -38,7 +38,7 @@
                 <button class="filter-btn" onclick="filterByStyle('action')">Action</button>
                 <button class="filter-btn" onclick="filterByStyle('rpg')">RPG</button>
                 <button class="filter-btn" onclick="filterByStyle('fps')">FPS</button>
-                <button class="filter-btn" onclick="filterCategory('strategy')">Stratégie</button>
+                <button class="filter-btn" onclick="filterByStyle('strategy')">Stratégie</button>
                 <button class="filter-btn" onclick="filterByStyle('simulation')">Simulation</button>
                 <button class="filter-btn" onclick="filterByStyle('horror')">Horreur</button>
             </div>
@@ -46,7 +46,6 @@
             <!-- Liste Alphabétique (A-Z) -->
             <div id="alphaFilters" class="filter-row" style="display: none;">
                 <button class="filter-btn active" onclick="filterByLetter('all')">Tous</button>
-                <!-- Génération rapide des lettres de A à Z -->
                 <script>
                     const letters = "abcdefghijklmnopqrstuvwxyz".split("");
                     letters.forEach(l => {
@@ -56,22 +55,21 @@
             </div>
         </div>
 
-        <!-- CONTENU : LISTE DES JEUX OU FICHE DÉTAILLÉE -->
+        <!-- CONTENU : LISTE DES JEUX (Cachée au départ) -->
         <main>
-            <!-- Grille des jeux -->
-            <section class="games-grid" id="gamesContainer">
+            <section class="games-grid" id="gamesContainer" style="display: none;">
 
-                <!-- JEU 1 : Explicatif Stalker 2 -->
+                <!-- JEU 1 -->
                 <article class="game-card" data-style="survival" data-name="stalker 2 heart of chornobyl" onclick="openGameDetails(this)">
                     <div class="media-container">
                         <img src="images/jeu1-cover.jpg" alt="Stalker 2">
                     </div>
                     <h3>Stalker 2: Heart of Chornobyl</h3>
-                    <p class="description">Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie post-apocalyptique.</p>
+                    <p class="description">Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie.</p>
                     <span class="tag-style">Survie / FPS</span>
                 </article>
 
-                <!-- JEU 2 : Super Course Auto -->
+                <!-- JEU 2 -->
                 <article class="game-card" data-style="cars" data-name="super course auto" onclick="openGameDetails(this)">
                     <div class="media-container">
                         <img src="images/jeu2-cover.jpg" alt="Super Course Auto">
@@ -83,16 +81,14 @@
 
             </section>
 
-            <!-- PAGE DE DÉTAIL D'UN JEU (Cachée par défaut) -->
+            <!-- PAGE DE DÉTAIL D'UN JEU -->
             <section id="gameDetailsView" style="display: none;" class="game-details-page">
-                <button class="back-btn" onclick="showHome()">← Retour aux jeux</button>
+                <button class="back-btn" onclick="goBackToList()">← Retour aux jeux</button>
                 
                 <h2 id="detailTitle">Titre du Jeu</h2>
                 
                 <div class="detail-media">
-                    <!-- Image principale ou miniature -->
                     <img id="detailImg" src="" alt="Aperçu du jeu">
-                    <!-- Vidéo de présentation -->
                     <video id="detailVideo" controls>
                         <source src="" type="video/mp4" id="detailVideoSource">
                         Votre navigateur ne supporte pas la vidéo.
@@ -103,13 +99,11 @@
                     <h3>Description</h3>
                     <p id="detailDesc">Description complète du jeu...</p>
 
-                    <!-- Lien vers SystemReqs -->
                     <div class="system-check-box">
                         <p>💡 Tu veux savoir si le jeu tourne sur ton PC ?</p>
                         <a href="https://systemreqs.com/fr/" target="_blank" class="btn-system">Vérifier ma configuration sur SystemReqs</a>
                     </div>
 
-                    <!-- Bouton de téléchargement -->
                     <div class="download-container">
                         <a href="#" id="detailDownloadBtn" class="btn-download-big" target="_blank">Télécharger la démo</a>
                     </div>
@@ -119,9 +113,29 @@
 
     </div>
 
-    <!-- SCRIPT JAVASCRIPT POUR TOUTE L'INTERACTIVITÉ -->
     <script>
-        // Changer entre le mode Style et le mode Alphabétique (A-Z)
+        let pcMenuOpen = false;
+
+        // Ouvrir / Fermer le menu Jeux PC
+        function togglePcMenu() {
+            const subMenu = document.getElementById('subMenuContainer');
+            const gamesGrid = document.getElementById('gamesContainer');
+            const mainBtn = document.getElementById('mainPcBtn');
+
+            pcMenuOpen = !pcMenuOpen;
+
+            if (pcMenuOpen) {
+                subMenu.style.display = 'block';
+                gamesGrid.style.display = 'grid';
+                mainBtn.classList.add('active');
+                filterByStyle('all');
+            } else {
+                subMenu.style.display = 'none';
+                gamesGrid.style.display = 'none';
+                mainBtn.classList.remove('active');
+            }
+        }
+
         function setBrowseMode(mode) {
             const styleBtn = document.querySelectorAll('.mode-btn')[0];
             const alphaBtn = document.querySelectorAll('.mode-btn')[1];
@@ -143,7 +157,6 @@
             }
         }
 
-        // Filtrer par Style
         function filterByStyle(style) {
             const cards = document.querySelectorAll('.game-card');
             updateActiveButton('#styleFilters', event);
@@ -157,7 +170,6 @@
             });
         }
 
-        // Filtrer par Lettre Alphabétique
         function filterByLetter(letter) {
             const cards = document.querySelectorAll('.game-card');
             updateActiveButton('#alphaFilters', event);
@@ -172,7 +184,6 @@
             });
         }
 
-        // Helper pour changer l'état actif des boutons du filtre
         function updateActiveButton(containerSelector, evt) {
             if (!evt) return;
             const container = document.querySelector(containerSelector);
@@ -180,10 +191,14 @@
             evt.target.classList.add('active');
         }
 
-        // Barre de recherche globale
         function filterGamesBySearch() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.querySelectorAll('.game-card');
+
+            // Si on cherche, s'assurer que le menu jeux PC s'ouvre tout seul
+            if (input.length > 0 && !pcMenuOpen) {
+                togglePcMenu();
+            }
 
             cards.forEach(card => {
                 let name = card.dataset.name.toLowerCase();
@@ -195,22 +210,15 @@
             });
         }
 
-        // Ouvrir la page de détail d'un jeu spécifique
         function openGameDetails(cardElement) {
-            // Récupérer les infos depuis la carte cliquée
             const title = cardElement.querySelector('h3').innerText;
             const desc = cardElement.querySelector('.description').innerText;
             const imgSrc = cardElement.querySelector('img').src;
             
-            // Remplir la vue détaillée
             document.getElementById('detailTitle').innerText = title;
             document.getElementById('detailDesc').innerText = desc;
             document.getElementById('detailImg').src = imgSrc;
             
-            // Exemple de lien de téléchargement personnalisé (tu pourras le lier à un attribut data-link dans la carte si tu veux)
-            document.getElementById('detailDownloadBtn.href = "#"');
-
-            // Cacher la liste et afficher les détails
             document.getElementById('gamesContainer').style.display = 'none';
             document.getElementById('subMenuContainer').style.display = 'none';
             document.getElementById('gameDetailsView').style.display = 'block';
@@ -218,13 +226,19 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Revenir à l'accueil
-        function showHome() {
+        function goBackToList() {
             document.getElementById('gameDetailsView').style.display = 'none';
-            document.getElementById('gamesContainer').style.display = 'grid';
             document.getElementById('subMenuContainer').style.display = 'block';
+            document.getElementById('gamesContainer').style.display = 'grid';
+        }
+
+        function showHome() {
+            pcMenuOpen = false;
+            document.getElementById('subMenuContainer').style.display = 'none';
+            document.getElementById('gamesContainer').style.display = 'none';
+            document.getElementById('gameDetailsView').style.display = 'none';
+            document.getElementById('mainPcBtn').classList.remove('active');
             document.getElementById('searchInput').value = '';
-            filterByStyle('all');
         }
     </script>
 
