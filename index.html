@@ -43,13 +43,13 @@
                 <button class="filter-btn" onclick="filterByStyle('horror')">Horreur</button>
             </div>
 
-            <!-- Liste Alphabétique (A-Z) - S'affiche en mode Alpha -->
+            <!-- Liste Alphabétique (A-Z) -->
             <div id="alphaFilters" class="filter-row" style="display: none; flex-wrap: wrap;">
-                <button class="filter-btn active" onclick="filterByLetter('all')">Tous</button>
+                <button class="filter-btn active" onclick="filterByLetter('all', event)">Tous</button>
                 <script>
                     const letters = "abcdefghijklmnopqrstuvwxyz".split("");
                     letters.forEach(l => {
-                        document.write(`<button class="filter-btn" onclick="filterByLetter('${l}')">${l.toUpperCase()}</button>`);
+                        document.write(`<button class="filter-btn" onclick="filterByLetter('${l}', event)">${l.toUpperCase()}</button>`);
                     });
                 </script>
             </div>
@@ -57,7 +57,7 @@
 
         <!-- CONTENU : LISTE DES JEUX -->
         <main>
-            <!-- Mode Style / Grille classique -->
+            <!-- Grille des jeux (utilisée pour le mode Style et le mode Alpha par lettre) -->
             <section class="games-grid" id="gamesContainer" style="display: none;">
                 <article class="game-card" data-style="survival" data-name="stalker 2 heart of chornobyl" onclick="openGameDetails(this)">
                     <div class="media-container">
@@ -78,10 +78,10 @@
                 </article>
             </section>
 
-            <!-- Mode Alphabétique par Lignes (A, B, C...) -->
-            <section id="alphaListContainer" style="display: none;" class="alpha-list-view">
-                <!-- Les lignes par lettre seront générées ici automatiquement par le script -->
-            </section>
+            <!-- Message d'indication en mode alphabétique pur -->
+            <div id="alphaWelcomeMsg" style="display: none; color: #8b949e; text-align: center; padding: 40px; font-size: 16px;">
+                👆 Clique sur une lettre ci-dessus pour afficher les jeux correspondants.
+            </div>
 
             <!-- PAGE DE DÉTAIL D'UN JEU -->
             <section id="gameDetailsView" style="display: none;" class="game-details-page">
@@ -132,7 +132,7 @@
             } else {
                 subMenu.style.display = 'none';
                 document.getElementById('gamesContainer').style.display = 'none';
-                document.getElementById('alphaListContainer').style.display = 'none';
+                document.getElementById('alphaWelcomeMsg').style.display = 'none';
                 document.getElementById('gameDetailsView').style.display = 'none';
                 mainBtn.classList.remove('active');
             }
@@ -145,7 +145,7 @@
             const styleFilters = document.getElementById('styleFilters');
             const alphaFilters = document.getElementById('alphaFilters');
             const gamesGrid = document.getElementById('gamesContainer');
-            const alphaList = document.getElementById('alphaListContainer');
+            const alphaWelcome = document.getElementById('alphaWelcomeMsg');
 
             document.getElementById('gameDetailsView').style.display = 'none';
 
@@ -155,16 +155,15 @@
                 styleFilters.style.display = 'flex';
                 alphaFilters.style.display = 'none';
                 gamesGrid.style.display = 'grid';
-                alphaList.style.display = 'none';
+                alphaWelcome.style.display = 'none';
                 filterByStyle('all');
             } else {
                 alphaBtn.classList.add('active');
                 styleBtn.classList.remove('active');
                 alphaFilters.style.display = 'flex';
                 styleFilters.style.display = 'none';
-                gamesGrid.style.display = 'none';
-                alphaList.style.display = 'block';
-                buildAlphaLines('all');
+                gamesGrid.style.display = 'none'; // Caché au départ en mode alpha !
+                alphaWelcome.style.display = 'block'; // Affiche le message "Clique sur une lettre"
             }
         }
 
@@ -181,55 +180,26 @@
             });
         }
 
-        // Construction des lignes par lettre (A, B, C...)
-        function buildAlphaLines(selectedLetter) {
-            updateActiveButton('#alphaFilters', event);
-            const container = document.getElementById('alphaListContainer');
-            container.innerHTML = '';
+        // Filtrer par lettre spécifique en mode A-Z
+        function filterByLetter(letter, evt) {
+            const gamesGrid = document.getElementById('gamesContainer');
+            const alphaWelcome = document.getElementById('alphaWelcomeMsg');
+            const cards = gamesGrid.querySelectorAll('.game-card');
 
-            const cards = document.querySelectorAll('#gamesContainer .game-card');
-            const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+            updateActiveButton('#alphaFilters', evt);
+            
+            // On affiche la grille de jeux et on cache le message d'accueil
+            gamesGrid.style.display = 'grid';
+            alphaWelcome.style.display = 'none';
 
-            alphabet.forEach(letter => {
-                // Si l'utilisateur a cliqué sur une lettre spécifique et que ce n'est pas celle-ci, on passe
-                if (selectedLetter !== 'all' && selectedLetter !== letter) return;
-
-                // Trouver les jeux qui commencent par cette lettre
-                let matchingCards = [];
-                cards.forEach(card => {
-                    let name = card.dataset.name.toLowerCase();
-                    if (name.startsWith(letter)) {
-                        matchingCards.push(card);
-                    }
-                });
-
-                // Si il y a des jeux pour cette lettre, on crée une ligne dédiée
-                if (matchingCards.length > 0) {
-                    let lineDiv = document.createElement('div');
-                    lineDiv.className = 'alpha-line-group';
-                    
-                    let letterTitle = document.createElement('h3');
-                    letterTitle.className = 'alpha-letter-heading';
-                    letterTitle.innerText = letter.toUpperCase();
-                    lineDiv.appendChild(letterTitle);
-
-                    let rowGames = document.createElement('div');
-                    rowGames.className = 'alpha-games-row';
-
-                    matchingCards.forEach(card => {
-                        let clone = card.cloneNode(true);
-                        clone.style.display = 'flex';
-                        rowGames.appendChild(clone);
-                    });
-
-                    lineDiv.appendChild(rowGames);
-                    container.appendChild(lineDiv);
+            cards.forEach(card => {
+                let name = card.dataset.name.toLowerCase();
+                if (letter === 'all' || name.startsWith(letter)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
                 }
             });
-
-            if (container.innerHTML === '') {
-                container.innerHTML = '<p style="color: #8b949e; text-align: center; padding: 20px;">Aucun jeu trouvé pour cette lettre.</p>';
-            }
         }
 
         function updateActiveButton(containerSelector, evt) {
@@ -245,22 +215,14 @@
                 togglePcMenu();
             }
 
-            if (currentMode === 'style') {
-                let cards = document.querySelectorAll('#gamesContainer .game-card');
-                cards.forEach(card => {
-                    let name = card.dataset.name.toLowerCase();
-                    card.style.display = name.includes(input) ? "flex" : "none";
-                });
-            } else {
-                // En mode alpha, on recherche en reconstruisant les lignes filtrées
-                buildAlphaLines('all');
-                // Optionnel : filtrer les cartes affichées dans les lignes
-                let allClones = document.querySelectorAll('#alphaListContainer .game-card');
-                allClones.forEach(card => {
-                    let name = card.dataset.name.toLowerCase();
-                    card.style.display = name.includes(input) ? "flex" : "none";
-                });
-            }
+            document.getElementById('gamesContainer').style.display = 'grid';
+            document.getElementById('alphaWelcomeMsg').style.display = 'none';
+
+            let cards = document.querySelectorAll('#gamesContainer .game-card');
+            cards.forEach(card => {
+                let name = card.dataset.name.toLowerCase();
+                card.style.display = name.includes(input) ? "flex" : "none";
+            });
         }
 
         function openGameDetails(cardElement) {
@@ -273,7 +235,7 @@
             document.getElementById('detailImg').src = imgSrc;
             
             document.getElementById('gamesContainer').style.display = 'none';
-            document.getElementById('alphaListContainer').style.display = 'none';
+            document.getElementById('alphaWelcomeMsg').style.display = 'none';
             document.getElementById('subMenuContainer').style.display = 'none';
             document.getElementById('gameDetailsView').style.display = 'block';
             
@@ -286,7 +248,8 @@
             if (currentMode === 'style') {
                 document.getElementById('gamesContainer').style.display = 'grid';
             } else {
-                document.getElementById('alphaListContainer').style.display = 'block';
+                document.getElementById('alphaWelcomeMsg').style.display = 'block';
+                document.getElementById('gamesContainer').style.display = 'none';
             }
         }
 
@@ -294,7 +257,7 @@
             pcMenuOpen = false;
             document.getElementById('subMenuContainer').style.display = 'none';
             document.getElementById('gamesContainer').style.display = 'none';
-            document.getElementById('alphaListContainer').style.display = 'none';
+            document.getElementById('alphaWelcomeMsg').style.display = 'none';
             document.getElementById('gameDetailsView').style.display = 'none';
             document.getElementById('mainPcBtn').classList.remove('active');
             document.getElementById('searchInput').value = '';
