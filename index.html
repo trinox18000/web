@@ -12,7 +12,7 @@
         
         <!-- En-tête -->
         <header>
-            <h1 onclick="showHome()">MonSiteDeJeux</h1>
+            <h1><a href="index.html" style="text-decoration: none; color: inherit;">MonSiteDeJeux</a></h1>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Rechercher un jeu..." onkeyup="filterGamesBySearch()">
             </div>
@@ -20,7 +20,7 @@
 
         <!-- MENU PRINCIPAL (Jeux PC) -->
         <nav class="main-menu">
-            <button class="main-btn" id="mainPcBtn" onclick="togglePcMenu()">Jeux PC 🎮</button>
+            <button class="main-btn active" id="mainPcBtn">Jeux PC 🎮</button>
         </nav>
 
         <!-- SOUS-MENU -->
@@ -32,15 +32,15 @@
 
             <!-- Liste des Styles -->
             <div id="styleFilters" class="filter-row">
-                <button class="filter-btn active" onclick="filterByStyle('all')">Tous</button>
-                <button class="filter-btn" onclick="filterByStyle('survival')">Survie</button>
-                <button class="filter-btn" onclick="filterByStyle('cars')">Voiture</button>
-                <button class="filter-btn" onclick="filterByStyle('action')">Action</button>
-                <button class="filter-btn" onclick="filterByStyle('rpg')">RPG</button>
-                <button class="filter-btn" onclick="filterByStyle('fps')">FPS</button>
-                <button class="filter-btn" onclick="filterByStyle('strategy')">Stratégie</button>
-                <button class="filter-btn" onclick="filterByStyle('simulation')">Simulation</button>
-                <button class="filter-btn" onclick="filterByStyle('horror')">Horreur</button>
+                <button class="filter-btn active" onclick="filterByStyle('all', event)">Tous</button>
+                <button class="filter-btn" onclick="filterByStyle('survival', event)">Survie</button>
+                <button class="filter-btn" onclick="filterByStyle('cars', event)">Voiture</button>
+                <button class="filter-btn" onclick="filterByStyle('action', event)">Action</button>
+                <button class="filter-btn" onclick="filterByStyle('rpg', event)">RPG</button>
+                <button class="filter-btn" onclick="filterByStyle('fps', event)">FPS</button>
+                <button class="filter-btn" onclick="filterByStyle('strategy', event)">Stratégie</button>
+                <button class="filter-btn" onclick="filterByStyle('simulation', event)">Simulation</button>
+                <button class="filter-btn" onclick="filterByStyle('horror', event)">Horreur</button>
             </div>
 
             <!-- Liste Alphabétique (A-Z) -->
@@ -57,86 +57,40 @@
 
         <!-- CONTENU : LISTE DES JEUX -->
         <main>
-            <!-- Grille des jeux (utilisée pour le mode Style et le mode Alpha par lettre) -->
-            <section class="games-grid" id="gamesContainer" style="display: none;">
-                <article class="game-card" data-style="survival" data-name="stalker 2 heart of chornobyl" onclick="openGameDetails(this)">
+            <section class="games-grid" id="gamesContainer">
+                
+                <!-- STALKER 2 -->
+                <a href="stalker2.html" class="game-card" data-style="survival" data-name="stalker 2 heart of chornobyl">
                     <div class="media-container">
                         <img src="images/jeu1-cover.jpg" alt="Stalker 2">
                     </div>
                     <h3>Stalker 2: Heart of Chornobyl</h3>
                     <p class="description">Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie.</p>
                     <span class="tag-style">Survie / FPS</span>
-                </article>
+                </a>
 
-                <article class="game-card" data-style="cars" data-name="super course auto" onclick="openGameDetails(this)">
+                <!-- SUPER COURSE AUTO -->
+                <a href="supercourse.html" class="game-card" data-style="cars" data-name="super course auto">
                     <div class="media-container">
                         <img src="images/jeu2-cover.jpg" alt="Super Course Auto">
                     </div>
                     <h3>Super Course Auto</h3>
                     <p class="description">Un jeu de course arcade ultra rapide avec des graphismes modernes.</p>
                     <span class="tag-style">Voiture</span>
-                </article>
+                </a>
+
             </section>
 
-            <!-- Message d'indication en mode alphabétique pur -->
+            <!-- Message d'indication en mode alphabétique pur si besoin -->
             <div id="alphaWelcomeMsg" style="display: none; color: #8b949e; text-align: center; padding: 40px; font-size: 16px;">
                 👆 Clique sur une lettre ci-dessus pour afficher les jeux correspondants.
             </div>
-
-            <!-- PAGE DE DÉTAIL D'UN JEU -->
-            <section id="gameDetailsView" style="display: none;" class="game-details-page">
-                <button class="back-btn" onclick="goBackToList()">← Retour aux jeux</button>
-                
-                <h2 id="detailTitle">Titre du Jeu</h2>
-                
-                <div class="detail-media">
-                    <img id="detailImg" src="" alt="Aperçu du jeu">
-                    <video id="detailVideo" controls>
-                        <source src="" type="video/mp4" id="detailVideoSource">
-                        Votre navigateur ne supporte pas la vidéo.
-                    </video>
-                </div>
-
-                <div class="detail-info">
-                    <h3>Description</h3>
-                    <p id="detailDesc">Description complète du jeu...</p>
-
-                    <div class="system-check-box">
-                        <p>💡 Tu veux savoir si le jeu tourne sur ton PC ?</p>
-                        <a href="https://systemreqs.com/fr/" target="_blank" class="btn-system">Vérifier ma configuration sur SystemReqs</a>
-                    </div>
-
-                    <div class="download-container">
-                        <a href="#" id="detailDownloadBtn" class="btn-download-big" target="_blank">Télécharger la démo</a>
-                    </div>
-                </div>
-            </section>
         </main>
 
     </div>
 
     <script>
-        let pcMenuOpen = false;
         let currentMode = 'style';
-
-        function togglePcMenu() {
-            const subMenu = document.getElementById('subMenuContainer');
-            const mainBtn = document.getElementById('mainPcBtn');
-
-            pcMenuOpen = !pcMenuOpen;
-
-            if (pcMenuOpen) {
-                subMenu.style.display = 'block';
-                mainBtn.classList.add('active');
-                setBrowseMode('style');
-            } else {
-                subMenu.style.display = 'none';
-                document.getElementById('gamesContainer').style.display = 'none';
-                document.getElementById('alphaWelcomeMsg').style.display = 'none';
-                document.getElementById('gameDetailsView').style.display = 'none';
-                mainBtn.classList.remove('active');
-            }
-        }
 
         function setBrowseMode(mode) {
             currentMode = mode;
@@ -144,32 +98,28 @@
             const alphaBtn = document.querySelectorAll('.mode-btn')[1];
             const styleFilters = document.getElementById('styleFilters');
             const alphaFilters = document.getElementById('alphaFilters');
-            const gamesGrid = document.getElementById('gamesContainer');
-            const alphaWelcome = document.getElementById('alphaWelcomeMsg');
-
-            document.getElementById('gameDetailsView').style.display = 'none';
 
             if (mode === 'style') {
                 styleBtn.classList.add('active');
                 alphaBtn.classList.remove('active');
                 styleFilters.style.display = 'flex';
                 alphaFilters.style.display = 'none';
-                gamesGrid.style.display = 'grid';
-                alphaWelcome.style.display = 'none';
                 filterByStyle('all');
             } else {
                 alphaBtn.classList.add('active');
                 styleBtn.classList.remove('active');
                 alphaFilters.style.display = 'flex';
                 styleFilters.style.display = 'none';
-                gamesGrid.style.display = 'none'; // Caché au départ en mode alpha !
-                alphaWelcome.style.display = 'block'; // Affiche le message "Clique sur une lettre"
+                filterByLetter('all'); // Affiche tous les jeux par défaut en mode alpha
             }
         }
 
-        function filterByStyle(style) {
+        function filterByStyle(style, evt) {
             const cards = document.querySelectorAll('#gamesContainer .game-card');
-            updateActiveButton('#styleFilters', event);
+            if (evt) {
+                document.querySelectorAll('#styleFilters .filter-btn').forEach(btn => btn.classList.remove('active'));
+                evt.target.classList.add('active');
+            }
 
             cards.forEach(card => {
                 if (style === 'all' || card.dataset.style === style) {
@@ -180,17 +130,12 @@
             });
         }
 
-        // Filtrer par lettre spécifique en mode A-Z
         function filterByLetter(letter, evt) {
-            const gamesGrid = document.getElementById('gamesContainer');
-            const alphaWelcome = document.getElementById('alphaWelcomeMsg');
-            const cards = gamesGrid.querySelectorAll('.game-card');
-
-            updateActiveButton('#alphaFilters', evt);
-            
-            // On affiche la grille de jeux et on cache le message d'accueil
-            gamesGrid.style.display = 'grid';
-            alphaWelcome.style.display = 'none';
+            const cards = document.querySelectorAll('#gamesContainer .game-card');
+            if (evt) {
+                document.querySelectorAll('#alphaFilters .filter-btn').forEach(btn => btn.classList.remove('active'));
+                evt.target.classList.add('active');
+            }
 
             cards.forEach(card => {
                 let name = card.dataset.name.toLowerCase();
@@ -202,65 +147,14 @@
             });
         }
 
-        function updateActiveButton(containerSelector, evt) {
-            if (!evt) return;
-            const container = document.querySelector(containerSelector);
-            container.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            evt.target.classList.add('active');
-        }
-
         function filterGamesBySearch() {
             let input = document.getElementById('searchInput').value.toLowerCase();
-            if (input.length > 0 && !pcMenuOpen) {
-                togglePcMenu();
-            }
-
-            document.getElementById('gamesContainer').style.display = 'grid';
-            document.getElementById('alphaWelcomeMsg').style.display = 'none';
-
             let cards = document.querySelectorAll('#gamesContainer .game-card');
+            
             cards.forEach(card => {
                 let name = card.dataset.name.toLowerCase();
                 card.style.display = name.includes(input) ? "flex" : "none";
             });
-        }
-
-        function openGameDetails(cardElement) {
-            const title = cardElement.querySelector('h3').innerText;
-            const desc = cardElement.querySelector('.description').innerText;
-            const imgSrc = cardElement.querySelector('img').src;
-            
-            document.getElementById('detailTitle').innerText = title;
-            document.getElementById('detailDesc').innerText = desc;
-            document.getElementById('detailImg').src = imgSrc;
-            
-            document.getElementById('gamesContainer').style.display = 'none';
-            document.getElementById('alphaWelcomeMsg').style.display = 'none';
-            document.getElementById('subMenuContainer').style.display = 'none';
-            document.getElementById('gameDetailsView').style.display = 'block';
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function goBackToList() {
-            document.getElementById('gameDetailsView').style.display = 'none';
-            document.getElementById('subMenuContainer').style.display = 'block';
-            if (currentMode === 'style') {
-                document.getElementById('gamesContainer').style.display = 'grid';
-            } else {
-                document.getElementById('alphaWelcomeMsg').style.display = 'block';
-                document.getElementById('gamesContainer').style.display = 'none';
-            }
-        }
-
-        function showHome() {
-            pcMenuOpen = false;
-            document.getElementById('subMenuContainer').style.display = 'none';
-            document.getElementById('gamesContainer').style.display = 'none';
-            document.getElementById('alphaWelcomeMsg').style.display = 'none';
-            document.getElementById('gameDetailsView').style.display = 'none';
-            document.getElementById('mainPcBtn').classList.remove('active');
-            document.getElementById('searchInput').value = '';
         }
     </script>
 
