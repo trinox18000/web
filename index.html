@@ -3,81 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Site de Démos de Jeux</title>
+    <title>Mon Site de Démos de Jeux PC</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Conteneur principal ajouté pour le centrage moderne -->
     <div class="site-container">
-
-        <!-- En-tête avec la barre de recherche -->
+        
+        <!-- En-tête -->
         <header>
-            <h1>MonSiteDeJeux</h1>
+            <h1 onclick="showHome()" style="cursor: pointer;">MonSiteDeJeux</h1>
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Rechercher un jeu..." onkeyup="filterGames()">
+                <input type="text" id="searchInput" placeholder="Rechercher un jeu..." onkeyup="filterGamesBySearch()">
             </div>
         </header>
 
-        <!-- Menu des Catégories -->
-        <nav class="category-menu">
-            <button class="filter-btn active" onclick="filterCategory('all')">Tous</button>
-            <button class="filter-btn" onclick="filterCategory('action')">Action</button>
-            <button class="filter-btn" onclick="filterCategory('survival')">Survie</button>
-            <button class="filter-btn" onclick="filterCategory('cars')">Voiture / Course</button>
-            <button class="filter-btn" onclick="filterCategory('rpg')">RPG</button>
-            <button class="filter-btn" onclick="filterCategory('fps')">FPS</button>
-            <button class="filter-btn" onclick="filterCategory('strategy')">Stratégie</button>
-            <button class="filter-btn" onclick="filterCategory('simulation')">Simulation</button>
-            <button class="filter-btn" onclick="filterCategory('horror')">Horreur</button>
-            <button class="filter-btn" onclick="filterCategory('sport')">Sport</button>
-            <button class="filter-btn" onclick="filterCategory('indie')">Indépendant</button>
+        <!-- MENU PRINCIPAL -->
+        <nav class="main-menu">
+            <button class="main-btn active" onclick="switchMenu('pc')">Jeux PC</button>
         </nav>
 
-        <!-- Liste des Jeux -->
+        <!-- SOUS-MENU (Style ou Alphabétique) -->
+        <div class="sub-menu-container" id="subMenuContainer">
+            <div class="mode-selectors">
+                <button class="mode-btn active" onclick="setBrowseMode('style')">Par Style</button>
+                <button class="mode-btn" onclick="setBrowseMode('alpha')">Par Ordre Alphabétique (A-Z)</button>
+            </div>
+
+            <!-- Liste des Styles -->
+            <div id="styleFilters" class="filter-row">
+                <button class="filter-btn active" onclick="filterByStyle('all')">Tous</button>
+                <button class="filter-btn" onclick="filterByStyle('survival')">Survie</button>
+                <button class="filter-btn" onclick="filterByStyle('cars')">Voiture</button>
+                <button class="filter-btn" onclick="filterByStyle('action')">Action</button>
+                <button class="filter-btn" onclick="filterByStyle('rpg')">RPG</button>
+                <button class="filter-btn" onclick="filterByStyle('fps')">FPS</button>
+                <button class="filter-btn" onclick="filterCategory('strategy')">Stratégie</button>
+                <button class="filter-btn" onclick="filterByStyle('simulation')">Simulation</button>
+                <button class="filter-btn" onclick="filterByStyle('horror')">Horreur</button>
+            </div>
+
+            <!-- Liste Alphabétique (A-Z) -->
+            <div id="alphaFilters" class="filter-row" style="display: none;">
+                <button class="filter-btn active" onclick="filterByLetter('all')">Tous</button>
+                <!-- Génération rapide des lettres de A à Z -->
+                <script>
+                    const letters = "abcdefghijklmnopqrstuvwxyz".split("");
+                    letters.forEach(l => {
+                        document.write(`<button class="filter-btn" onclick="filterByLetter('${l}')">${l.toUpperCase()}</button>`);
+                    });
+                </script>
+            </div>
+        </div>
+
+        <!-- CONTENU : LISTE DES JEUX OU FICHE DÉTAILLÉE -->
         <main>
+            <!-- Grille des jeux -->
             <section class="games-grid" id="gamesContainer">
 
-                <!-- Jeu 1 : Survie -->
-                <article class="game-card" data-category="survival" data-name="nom du jeu de survie zend">
-                    <h3>Nom du Jeu de Survie (Démo)</h3>
-                    <p class="description">Une courte description du jeu de survie.</p>
+                <!-- JEU 1 : Explicatif Stalker 2 -->
+                <article class="game-card" data-style="survival" data-name="stalker 2 heart of chornobyl" onclick="openGameDetails(this)">
                     <div class="media-container">
-                        <img src="images/jeu1-cover.jpg" alt="Aperçu du jeu">
+                        <img src="images/jeu1-cover.jpg" alt="Stalker 2">
                     </div>
-                    <div class="download-section">
-                        <a href="LIEN_TELECHARGEMENT" class="btn-download" target="_blank">Télécharger la démo</a>
-                    </div>
+                    <h3>Stalker 2: Heart of Chornobyl</h3>
+                    <p class="description">Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie post-apocalyptique.</p>
+                    <span class="tag-style">Survie / FPS</span>
                 </article>
 
-                <!-- Jeu 2 : Voiture -->
-                <article class="game-card" data-category="cars" data-name="super course auto">
-                    <h3>Super Course Auto (Démo)</h3>
-                    <p class="description">Un jeu de course de voiture arcade ultra rapide.</p>
+                <!-- JEU 2 : Super Course Auto -->
+                <article class="game-card" data-style="cars" data-name="super course auto" onclick="openGameDetails(this)">
                     <div class="media-container">
-                        <img src="images/jeu2-cover.jpg" alt="Aperçu du jeu">
+                        <img src="images/jeu2-cover.jpg" alt="Super Course Auto">
                     </div>
-                    <div class="download-section">
-                        <a href="LIEN_TELECHARGEMENT" class="btn-download" target="_blank">Télécharger la démo</a>
-                    </div>
+                    <h3>Super Course Auto</h3>
+                    <p class="description">Un jeu de course arcade ultra rapide avec des graphismes modernes.</p>
+                    <span class="tag-style">Voiture</span>
                 </article>
 
             </section>
+
+            <!-- PAGE DE DÉTAIL D'UN JEU (Cachée par défaut) -->
+            <section id="gameDetailsView" style="display: none;" class="game-details-page">
+                <button class="back-btn" onclick="showHome()">← Retour aux jeux</button>
+                
+                <h2 id="detailTitle">Titre du Jeu</h2>
+                
+                <div class="detail-media">
+                    <!-- Image principale ou miniature -->
+                    <img id="detailImg" src="" alt="Aperçu du jeu">
+                    <!-- Vidéo de présentation -->
+                    <video id="detailVideo" controls>
+                        <source src="" type="video/mp4" id="detailVideoSource">
+                        Votre navigateur ne supporte pas la vidéo.
+                    </video>
+                </div>
+
+                <div class="detail-info">
+                    <h3>Description</h3>
+                    <p id="detailDesc">Description complète du jeu...</p>
+
+                    <!-- Lien vers SystemReqs -->
+                    <div class="system-check-box">
+                        <p>💡 Tu veux savoir si le jeu tourne sur ton PC ?</p>
+                        <a href="https://systemreqs.com/fr/" target="_blank" class="btn-system">Vérifier ma configuration sur SystemReqs</a>
+                    </div>
+
+                    <!-- Bouton de téléchargement -->
+                    <div class="download-container">
+                        <a href="#" id="detailDownloadBtn" class="btn-download-big" target="_blank">Télécharger la démo</a>
+                    </div>
+                </div>
+            </section>
         </main>
 
-    </div> <!-- Fin du site-container -->
+    </div>
 
-    <!-- Script JavaScript pour la Recherche et les Filtres -->
+    <!-- SCRIPT JAVASCRIPT POUR TOUTE L'INTERACTIVITÉ -->
     <script>
-        function filterCategory(category) {
-            const cards = document.querySelectorAll('.game-card');
-            const buttons = document.querySelectorAll('.filter-btn');
+        // Changer entre le mode Style et le mode Alphabétique (A-Z)
+        function setBrowseMode(mode) {
+            const styleBtn = document.querySelectorAll('.mode-btn')[0];
+            const alphaBtn = document.querySelectorAll('.mode-btn')[1];
+            const styleFilters = document.getElementById('styleFilters');
+            const alphaFilters = document.getElementById('alphaFilters');
 
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (mode === 'style') {
+                styleBtn.classList.add('active');
+                alphaBtn.classList.remove('active');
+                styleFilters.style.display = 'flex';
+                alphaFilters.style.display = 'none';
+                filterByStyle('all');
+            } else {
+                alphaBtn.classList.add('active');
+                styleBtn.classList.remove('active');
+                alphaFilters.style.display = 'flex';
+                styleFilters.style.display = 'none';
+                filterByLetter('all');
+            }
+        }
+
+        // Filtrer par Style
+        function filterByStyle(style) {
+            const cards = document.querySelectorAll('.game-card');
+            updateActiveButton('#styleFilters', event);
 
             cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
+                if (style === 'all' || card.dataset.style === style) {
                     card.style.display = "flex";
                 } else {
                     card.style.display = "none";
@@ -85,7 +157,31 @@
             });
         }
 
-        function filterGames() {
+        // Filtrer par Lettre Alphabétique
+        function filterByLetter(letter) {
+            const cards = document.querySelectorAll('.game-card');
+            updateActiveButton('#alphaFilters', event);
+
+            cards.forEach(card => {
+                let name = card.dataset.name.toLowerCase();
+                if (letter === 'all' || name.startsWith(letter)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Helper pour changer l'état actif des boutons du filtre
+        function updateActiveButton(containerSelector, evt) {
+            if (!evt) return;
+            const container = document.querySelector(containerSelector);
+            container.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            evt.target.classList.add('active');
+        }
+
+        // Barre de recherche globale
+        function filterGamesBySearch() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.querySelectorAll('.game-card');
 
@@ -97,6 +193,38 @@
                     card.style.display = "none";
                 }
             });
+        }
+
+        // Ouvrir la page de détail d'un jeu spécifique
+        function openGameDetails(cardElement) {
+            // Récupérer les infos depuis la carte cliquée
+            const title = cardElement.querySelector('h3').innerText;
+            const desc = cardElement.querySelector('.description').innerText;
+            const imgSrc = cardElement.querySelector('img').src;
+            
+            // Remplir la vue détaillée
+            document.getElementById('detailTitle').innerText = title;
+            document.getElementById('detailDesc').innerText = desc;
+            document.getElementById('detailImg').src = imgSrc;
+            
+            // Exemple de lien de téléchargement personnalisé (tu pourras le lier à un attribut data-link dans la carte si tu veux)
+            document.getElementById('detailDownloadBtn.href = "#"');
+
+            // Cacher la liste et afficher les détails
+            document.getElementById('gamesContainer').style.display = 'none';
+            document.getElementById('subMenuContainer').style.display = 'none';
+            document.getElementById('gameDetailsView').style.display = 'block';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Revenir à l'accueil
+        function showHome() {
+            document.getElementById('gameDetailsView').style.display = 'none';
+            document.getElementById('gamesContainer').style.display = 'grid';
+            document.getElementById('subMenuContainer').style.display = 'block';
+            document.getElementById('searchInput').value = '';
+            filterByStyle('all');
         }
     </script>
 
