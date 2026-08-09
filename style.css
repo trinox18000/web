@@ -66,7 +66,7 @@ header h1 {
 
 .sub-menu-container {
     width: 100%;
-    max-width: 900px; /* On l'élargit un tout petit peu pour être sûr que tout tienne */
+    max-width: 1250px; /* Boîte élargie pour faire tenir tout l'alphabet sur une seule ligne */
     margin: 0 auto;
 }
 
@@ -78,20 +78,23 @@ header h1 {
 
 .filter-row {
     display: flex;
-    flex-wrap: wrap; 
-    gap: 6px; /* Réduit légèrement l'espace entre les boutons pour gagner de la place */
-    padding: 10px 15px; /* Ajuste les marges intérieures de la boîte */
+    flex-wrap: nowrap; /* Empêche le retour à la ligne forcé */
+    overflow-x: auto; /* Sécurité si l'écran est plus petit */
+    gap: 4px; /* Espace optimisé entre les boutons pour tout aligner */
+    padding: 10px 15px;
 }
 
 .filter-btn {
     background-color: #21262d;
     color: #c9d1d9;
     border: 1px solid #30363d;
-    padding: 8px 15px;
+    padding: 8px 10px; /* Padding ajusté pour gagner de la place */
     border-radius: 20px;
     cursor: pointer;
     white-space: nowrap;
     font-size: 13px;
+    min-width: 34px;
+    text-align: center;
 }
 
 .filter-btn:hover, .filter-btn.active {
@@ -214,6 +217,7 @@ header h1 {
     font-size: 16px;
     font-weight: bold;
 }
+
 /* Style des lignes alphabétiques (A, B, C...) */
 .alpha-line-group {
     margin-bottom: 30px;
