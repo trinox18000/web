@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Site de Démos de Jeux PC</title>
     <link rel="stylesheet" href="style.css">
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
     <div class="site-container">
         
         <!-- En-tête -->
-        <header>
-            <h1><a href="index.html" style="text-decoration: none; color: inherit;">MonSiteDeJeux</a></h1>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Rechercher un jeu..." onkeyup="filterGamesBySearch()">
-            </div>
-        </header>
+       <header class="banner-header">
+    <a href="index.html">
+        <img src="assets/logo site/images/logo-trinox.png" alt="Trinox Project Games" class="banner-img">
+    </a>
+</header>
 
-        <!-- MENU PRINCIPAL (Jeux PC) -->
-        <nav class="main-menu">
-            <button class="main-btn active" id="mainPcBtn">Jeux PC 🎮</button>
+        <!-- MENU PRINCIPAL (Accueil + Jeux PC) -->
+        <nav class="main-menu" style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <button class="main-btn active" id="accueilBtn" onclick="showAccueil()">🏠 Accueil</button>
+            <button class="main-btn" id="jeuxPcBtn" onclick="showJeuxPC()">Jeux PC 🎮</button>
         </nav>
 
-        <!-- SOUS-MENU -->
-        <div class="sub-menu-container" id="subMenuContainer">
+        <!-- SOUS-MENU (Caché par défaut, s'affiche quand on clique sur Jeux PC) -->
+        <div class="sub-menu-container" id="subMenuContainer" style="display: none;">
             <div class="mode-selectors">
                 <button class="mode-btn active" onclick="setBrowseMode('style')">Par Style</button>
                 <button class="mode-btn" onclick="setBrowseMode('alpha')">Par Ordre Alphabétique (A-Z)</button>
@@ -35,13 +35,15 @@
             <div id="styleFilters" class="filter-row">
                 <button class="filter-btn active" onclick="filterByStyle('all', event)">Tous</button>
                 <button class="filter-btn" onclick="filterByStyle('survival', event)">Survie</button>
-                <button class="filter-btn" onclick="filterByStyle('cars', event)">Voiture</button>
+                <button class="filter-btn" onclick="filterByStyle('fps', event)">FPS / TPS</button>
                 <button class="filter-btn" onclick="filterByStyle('action', event)">Action</button>
+                <button class="filter-btn" onclick="filterByStyle('adventure', event)">Aventure</button>
                 <button class="filter-btn" onclick="filterByStyle('rpg', event)">RPG</button>
-                <button class="filter-btn" onclick="filterByStyle('fps', event)">FPS</button>
-                <button class="filter-btn" onclick="filterByStyle('strategy', event)">Stratégie</button>
+                <button class="filter-btn" onclick="filterByStyle('cars', event)">Voiture / Course</button>
                 <button class="filter-btn" onclick="filterByStyle('simulation', event)">Simulation</button>
+                <button class="filter-btn" onclick="filterByStyle('strategy', event)">Stratégie</button>
                 <button class="filter-btn" onclick="filterByStyle('horror', event)">Horreur</button>
+                <button class="filter-btn" onclick="filterByStyle('roguelike', event)">Rogue-like</button>
             </div>
 
             <!-- Liste Alphabétique (A-Z) -->
@@ -60,17 +62,19 @@
         <main>
             <section class="games-grid" id="gamesContainer">
                 
-                <!-- STALKER 2 -->
-                <a href="stalker2.html" class="game-card" data-style="survival" data-name="stalker 2 heart of chornobyl">
+                <!-- 💡 METS TOUJOURS LES NOUVEAUX JEUX TOUT EN HAUT ICI -->
+
+                <!-- JEU 1 -->
+                <a href="stalker2.html" class="game-card" data-style="survival fps" data-name="stalker 2 heart of chornobyl">
                     <div class="media-container">
-                        <img src="images/jeu1-cover.jpg" alt="Stalker 2">
+                        <img src="assets/stalker2/images/cover.jpg" alt="Stalker 2">
                     </div>
                     <h3>Stalker 2: Heart of Chornobyl</h3>
                     <p class="description">Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie.</p>
                     <span class="tag-style">Survie / FPS</span>
                 </a>
 
-                <!-- SUPER COURSE AUTO -->
+                <!-- JEU 2 -->
                 <a href="supercourse.html" class="game-card" data-style="cars" data-name="super course auto">
                     <div class="media-container">
                         <img src="images/jeu2-cover.jpg" alt="Super Course Auto">
@@ -81,17 +85,37 @@
                 </a>
 
             </section>
-
-            <!-- Message d'indication en mode alphabétique pur si besoin -->
-            <div id="alphaWelcomeMsg" style="display: none; color: #8b949e; text-align: center; padding: 40px; font-size: 16px;">
-                👆 Clique sur une lettre ci-dessus pour afficher les jeux correspondants.
-            </div>
         </main>
 
     </div>
 
     <script>
         let currentMode = 'style';
+
+        // Fonction pour afficher la vue Accueil (cache les filtres et montre les 5 derniers max)
+        function showAccueil() {
+            document.getElementById('accueilBtn').classList.add('active');
+            document.getElementById('jeuxPcBtn').classList.remove('active');
+            document.getElementById('subMenuContainer').style.display = 'none';
+
+            const cards = document.querySelectorAll('#gamesContainer .game-card');
+            cards.forEach((card, index) => {
+                // Affiche uniquement les 5 premiers, cache les autres sur l'accueil
+                if (index < 5) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Fonction pour afficher la vue Jeux PC (affiche les filtres et tous les jeux)
+        function showJeuxPC() {
+            document.getElementById('jeuxPcBtn').classList.add('active');
+            document.getElementById('accueilBtn').classList.remove('active');
+            document.getElementById('subMenuContainer').style.display = 'block';
+            setBrowseMode('style'); // Remet par défaut sur "Par Style"
+        }
 
         function setBrowseMode(mode) {
             currentMode = mode;
@@ -111,7 +135,7 @@
                 styleBtn.classList.remove('active');
                 alphaFilters.style.display = 'flex';
                 styleFilters.style.display = 'none';
-                filterByLetter('all'); // Affiche tous les jeux par défaut en mode alpha
+                filterByLetter('all');
             }
         }
 
@@ -123,10 +147,18 @@
             }
 
             cards.forEach(card => {
-                if (style === 'all' || card.dataset.style === style) {
+                let gameStyles = card.dataset.style; // Récupère les styles (ex: "fps survival")
+                
+                if (style === 'all') {
                     card.style.display = "flex";
                 } else {
-                    card.style.display = "none";
+                    // On découpe les styles par l'espace pour vérifier si l'un d'eux correspond
+                    let stylesArray = gameStyles ? gameStyles.split(' ') : [];
+                    if (stylesArray.includes(style)) {
+                        card.style.display = "flex";
+                    } else {
+                        card.style.display = "none";
+                    }
                 }
             });
         }
@@ -157,7 +189,12 @@
                 card.style.display = name.includes(input) ? "flex" : "none";
             });
         }
+
+        // Au chargement de la page, on s'assure d'être sur l'Accueil (max 5 jeux)
+        window.onload = function() {
+            showAccueil();
+        };
     </script>
-<script src="script.js"></script>	
+    <script src="script.js"></script>    
 </body>
 </html>
