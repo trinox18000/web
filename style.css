@@ -218,3 +218,30 @@ header h1 {
     font-size: 16px;
     font-weight: bold;
 }
+/* Style des lignes alphabétiques (A, B, C...) */
+.alpha-line-group {
+    margin-bottom: 30px;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.alpha-letter-heading {
+    font-size: 24px;
+    color: #58a6ff;
+    border-bottom: 2px solid #30363d;
+    padding-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.alpha-games-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.alpha-games-row .game-card {
+    width: 280px;
+}
