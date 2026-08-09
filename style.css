@@ -180,13 +180,20 @@ header h1 {
 }
 
 .back-btn {
-    background: #30363d;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 6px;
+    background: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    padding: 8px 16px;
+    border-radius: 20px; /* Des bords arrondis assortis au reste ! */
     cursor: pointer;
     margin-bottom: 20px;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #30363d;
+    color: white;
 }
 
 .detail-media {
@@ -370,8 +377,8 @@ header h1 {
     text-align: left;
     background-color: #161b22; /* Fond sombre de la carte */
     border: 1px solid #30363d;  /* Fine bordure discrète */
-    padding: 25px;             /* Espace intérieur pour le texte */
-    border-radius: 12px;       /* Coins arrondis harmonieux */
+    padding: 25px;              /* Espace intérieur pour le texte */
+    border-radius: 12px;        /* Coins arrondis harmonieux */
 }
 
 .detail-info p {
@@ -539,4 +546,35 @@ body.admin-logged-in .comment-item .btn-delete {
     display: block;
     /* On enlève l'ancien border-radius ici, il est géré par le header parent */
     border-radius: 16px; 
+}
+
+/* --- STYLE POUR LA PAGINATION (BOUTONS PAGES 1, 2, 3...) --- */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 35px 0 15px 0;
+    width: 100%;
+}
+
+.page-btn {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.page-btn:hover {
+    background-color: #21262d;
+    border-color: #8b949e;
+}
+
+.page-btn.active {
+    background-color: #238636;
+    border-color: #2e9d43;
+    color: #ffffff;
 }

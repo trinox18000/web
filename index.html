@@ -12,11 +12,11 @@
     <div class="site-container">
         
         <!-- En-tête -->
-       <header class="banner-header">
-    <a href="index.html">
-        <img src="assets/logo site/images/logo-trinox.png" alt="Trinox Project Games" class="banner-img">
-    </a>
-</header>
+        <header class="banner-header">
+            <a href="index.html">
+                <img src="assets/logo site/images/logo-trinox.png" alt="Trinox Project Games" class="banner-img">
+            </a>
+        </header>
 
         <!-- MENU PRINCIPAL (Accueil + Jeux PC) -->
         <nav class="main-menu" style="display: flex; gap: 10px; margin-bottom: 20px;">
@@ -58,37 +58,19 @@
             </div>
         </div>
 
-        <!-- CONTENU : LISTE DES JEUX -->
+        <!-- CONTENU : LISTE DES JEUX GENEREE PAR GAMES.JS -->
         <main>
             <section class="games-grid" id="gamesContainer">
-                
-                <!-- 💡 METS TOUJOURS LES NOUVEAUX JEUX TOUT EN HAUT ICI -->
-
-                <!-- JEU 1 -->
-                <a href="stalker2.html" class="game-card" data-style="survival fps" data-name="stalker 2 heart of chornobyl">
-                    <div class="media-container">
-                        <img src="assets/stalker2/images/cover.jpg" alt="Stalker 2">
-                    </div>
-                    <h3>Stalker 2: Heart of Chornobyl</h3>
-                    <p class="description">Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie.</p>
-                    <span class="tag-style">Survie / FPS</span>
-                </a>
-
-                <!-- JEU 2 -->
-                <a href="supercourse.html" class="game-card" data-style="cars" data-name="super course auto">
-                    <div class="media-container">
-                        <img src="images/jeu2-cover.jpg" alt="Super Course Auto">
-                    </div>
-                    <h3>Super Course Auto</h3>
-                    <p class="description">Un jeu de course arcade ultra rapide avec des graphismes modernes.</p>
-                    <span class="tag-style">Voiture</span>
-                </a>
-
+                <!-- Les cartes sont générées automatiquement par games.js ! -->
             </section>
         </main>
 
     </div>
 
+    <!-- SCRIPT QUI GÉNEÈRE LES JEUX EN PREMIER -->
+    <script src="games.js"></script>
+
+    <!-- LOGIQUE ET FILTRES -->
     <script>
         let currentMode = 'style';
 
@@ -147,12 +129,10 @@
             }
 
             cards.forEach(card => {
-                let gameStyles = card.dataset.style; // Récupère les styles (ex: "fps survival")
-                
+                let gameStyles = card.dataset.style;
                 if (style === 'all') {
                     card.style.display = "flex";
                 } else {
-                    // On découpe les styles par l'espace pour vérifier si l'un d'eux correspond
                     let stylesArray = gameStyles ? gameStyles.split(' ') : [];
                     if (stylesArray.includes(style)) {
                         card.style.display = "flex";
