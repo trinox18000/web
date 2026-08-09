@@ -65,12 +65,9 @@ header h1 {
 }
 
 .sub-menu-container {
-    display: none; /* Caché par défaut jusqu'au clic sur Jeux PC */
-    background: #161b22;
-    border: 1px solid #30363d;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 25px;
+    width: 100%;
+    max-width: 900px; /* On l'élargit un tout petit peu pour être sûr que tout tienne */
+    margin: 0 auto;
 }
 
 .mode-selectors {
@@ -81,10 +78,9 @@ header h1 {
 
 .filter-row {
     display: flex;
-	flex-wrap: wrap;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 5px;
+    flex-wrap: wrap; 
+    gap: 6px; /* Réduit légèrement l'espace entre les boutons pour gagner de la place */
+    padding: 10px 15px; /* Ajuste les marges intérieures de la boîte */
 }
 
 .filter-btn {
