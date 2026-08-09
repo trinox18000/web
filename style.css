@@ -251,6 +251,8 @@ header h1 {
 }
 /* --- STYLE POUR LES CARROUSELS D'IMAGES ET DE VIDÉOS --- */
 
+/* --- STYLE POUR LES CARROUSELS D'IMAGES ET DE VIDÉOS (MODE UN PAR UN) --- */
+
 .media-section {
     margin-bottom: 30px;
 }
@@ -259,24 +261,25 @@ header h1 {
     position: relative;
     display: flex;
     align-items: center;
+    max-width: 600px; /* Limite la largeur du lecteur pour que ce soit bien centré et propre */
+    margin: 0 auto;
 }
 
 .carousel-track {
     display: flex;
-    gap: 15px;
-    overflow-x: auto;
+    gap: 0;
+    overflow: hidden; /* C'est ça qui cache tout le reste et n'affiche qu'un seul élément */
     scroll-behavior: smooth;
-    scrollbar-width: none; /* Cache la barre de défilement sur Firefox */
-    padding: 10px 0;
     width: 100%;
 }
 
 .carousel-track::-webkit-scrollbar {
-    display: none; /* Cache la barre de défilement sur Chrome/Safari */
+    display: none;
 }
 
 .carousel-track img {
-    height: 220px;
+    width: 100%;
+    height: 320px;
     border-radius: 8px;
     flex-shrink: 0;
     object-fit: cover;
@@ -285,12 +288,12 @@ header h1 {
 
 .carousel-video-item {
     flex-shrink: 0;
-    width: 380px;
+    width: 100%;
 }
 
 .carousel-video-item video {
     width: 100%;
-    height: 220px;
+    height: 320px;
     object-fit: cover;
     border-radius: 8px;
     display: block;
@@ -318,9 +321,9 @@ header h1 {
 }
 
 .prev-btn {
-    left: -20px;
+    left: -25px;
 }
 
 .next-btn {
-    right: -20px;
+    right: -25px;
 }

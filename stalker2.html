@@ -19,13 +19,13 @@
                 <div class="media-section">
                     <h3>Captures d'écran</h3>
                     <div class="carousel-container">
-                        <button class="carousel-btn prev-btn" onclick="scrollCarousel('imagesScroll', -300)">❮</button>
+                        <button class="carousel-btn prev-btn" onclick="scrollCarousel('imagesScroll', -600)">❮</button>
                         <div class="carousel-track" id="imagesScroll">
                             <img src="assets/stalker2/images/cover.jpg" alt="Cover">
                             <img src="assets/stalker2/images/screenshot-1.jpg" alt="Screenshot 1">
                             <img src="assets/stalker2/images/screenshot-2.jpg" alt="Screenshot 2">
                         </div>
-                        <button class="carousel-btn next-btn" onclick="scrollCarousel('imagesScroll', 300)">❯</button>
+                        <button class="carousel-btn next-btn" onclick="scrollCarousel('imagesScroll', 600)">❯</button>
                     </div>
                 </div>
 
@@ -33,12 +33,12 @@
                 <div class="media-section">
                     <h3>Vidéos</h3>
                     <div class="carousel-container">
-                        <button class="carousel-btn prev-btn" onclick="scrollCarousel('videosScroll', -300)">❮</button>
+                        <button class="carousel-btn prev-btn" onclick="scrollCarousel('videosScroll', -600)">❮</button>
                         <div class="carousel-track" id="videosScroll">
                             <div class="carousel-video-item"><video controls><source src="assets/stalker2/video/trailer.mp4" type="video/mp4"></video></div>
                             <div class="carousel-video-item"><video controls><source src="assets/stalker2/video/gameplay.mp4" type="video/mp4"></video></div>
                         </div>
-                        <button class="carousel-btn next-btn" onclick="scrollCarousel('videosScroll', 300)">❯</button>
+                        <button class="carousel-btn next-btn" onclick="scrollCarousel('videosScroll', 600)">❯</button>
                     </div>
                 </div>
 
@@ -59,14 +59,7 @@
             </section>
         </main>
     </div>
-
-    <script>
-        // Fonction pour faire défiler les carrousels
-        function scrollCarousel(id, distance) {
-            const track = document.getElementById(id);
-            track.scrollBy({ left: distance, behavior: 'smooth' });
-        }
-    </script>
+	
 <script src="script.js"></script>
 </body>
 </html>
