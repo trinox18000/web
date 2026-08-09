@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stalker 2: Heart of Chornobyl - Mon Site de Jeux</title>
+    <title>Stalker 2 : Heart of Chornobyl - Mon Site de Jeux</title>
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -13,9 +14,15 @@
             <section class="game-details-page">
                 <a href="index.html" class="back-btn">← Retour aux jeux</a>
                 
-                <h2>Stalker 2: Heart of Chornobyl</h2>
+                <h2>Stalker 2 : Heart of Chornobyl</h2>
                 
-                <!-- Galerie de Captures d'écran (avec défilement horizontal) -->
+                <!-- 1. LA DESCRIPTION -->
+                <div class="detail-info" style="margin-bottom: 30px;">
+                    <h3>Description :</h3>
+                    <p>Partez explorer la vaste Zone d'exclusion de Tchernobyl et ses ennemis redoutables, ses anomalies mortelles et ses puissants artefacts. Découvrez votre propre histoire épique en vous frayant un chemin jusqu'au cœur de Tchernobyl.</p>
+                </div>
+
+                <!-- 2. LES CAPTURES D'ÉCRAN -->
                 <div class="media-section">
                     <h3>Captures d'écran</h3>
                     <div class="carousel-container">
@@ -29,37 +36,59 @@
                     </div>
                 </div>
 
-                <!-- Galerie de Vidéos (avec défilement horizontal) -->
+                <!-- 3. LES VIDÉOS -->
                 <div class="media-section">
                     <h3>Vidéos</h3>
                     <div class="carousel-container">
                         <button class="carousel-btn prev-btn" onclick="scrollCarousel('videosScroll', -600)">❮</button>
                         <div class="carousel-track" id="videosScroll">
-                            <div class="carousel-video-item"><video controls><source src="assets/stalker2/video/trailer.mp4" type="video/mp4"></video></div>
-                            <div class="carousel-video-item"><video controls><source src="assets/stalker2/video/gameplay.mp4" type="video/mp4"></video></div>
+                            <div class="carousel-video-item">
+                                <video controls>
+                                    <source src="assets/stalker2/videos/trailer.mp4" type="video/mp4">
+                                    <track src="assets/stalker2/videos/stalker2 traileur .vtt" kind="subtitles" srclang="fr" label="Français" default>
+                                </video>
+                            </div>
+                            <div class="carousel-video-item">
+                                <video controls>
+                                    <source src="assets/stalker2/videos/gameplay.mp4" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
                         <button class="carousel-btn next-btn" onclick="scrollCarousel('videosScroll', 600)">❯</button>
                     </div>
                 </div>
 
-                <!-- Section Informations -->
-                <div class="detail-info">
-                    <h3>Description</h3>
-                    <p>Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie ultra immersif.</p>
-
-                    <div class="system-check-box">
+                <!-- 4. CONFIG PC & TÉLÉCHARGEMENT -->
+                <div class="system-check-box">
+                    <div class="system-check-inner">
                         <p>💡 Tu veux savoir si le jeu tourne sur ton PC ?</p>
-                        <a href="https://systemreqs.com/fr/" target="_blank" class="btn-system">Vérifier ma configuration sur SystemReqs</a>
+                        <a href="https://systemreqs.com/fr/jeu/stalker-2" target="_blank" class="btn-system">Vérifier ma configuration sur SystemReqs</a>
                     </div>
 
-                    <div class="download-container">
-                        <a href="#" class="btn-download-big" target="_blank">Télécharger la démo</a>
+                    <a href="ton-lien-vers-le-jeu" class="btn-download-big">Télécharger le jeu</a>
+                </div>
+
+                <!-- 5. SECTION COMMENTAIRES -->
+                <div class="comments-section">
+                    <h3>Mets un commentaire</h3>
+                    
+                    <!-- Formulaire pour poster un commentaire -->
+                    <form class="comment-form" onsubmit="addComment(event)">
+                        <input type="text" id="commentAuthor" placeholder="Votre pseudo" required>
+                        <textarea id="commentText" placeholder="Écrire un commentaire..." rows="3" required></textarea>
+                        <button type="submit" class="btn-comment">Publier</button>
+                    </form>
+
+                    <!-- Liste où les commentaires vont s'afficher -->
+                    <div id="commentsList" class="comments-list">
+                        <!-- Les nouveaux commentaires s'ajouteront ici automatiquement -->
                     </div>
                 </div>
+
             </section>
         </main>
     </div>
-	
-<script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -157,8 +157,13 @@ header h1 {
     width: fit-content;
 }
 
-/* Page de détail */
+/* Page de détail (Stalker 2 uniquement) */
 .game-details-page {
+    background-image: linear-gradient(rgba(13, 17, 23, 0.60), rgba(13, 17, 23, 0.60)), url('assets/stalker2/images/S2HoC_GSCGameWorld_Duga.png');
+    background-size: cover;          /* Remplit tout le bloc de la page de détail */
+    background-attachment: fixed;
+    background-repeat: no-repeat;    /* Pas de répétition */
+    background-position: center;     /* Centré proprement */
     background-color: #161b22;
     border: 1px solid #30363d;
     padding: 30px;
@@ -189,22 +194,33 @@ header h1 {
     border: 1px solid #30363d;
 }
 
+/* UN SEUL GRAND CADRE UNIQUE POUR CONFIG & TÉLÉCHARGEMENT */
 .system-check-box {
-    background: #0d1117;
+    background: rgba(13, 17, 23, 0.85); /* Légèrement transparent pour voir le fond Duga */
     border: 1px solid #30363d;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 20px 0;
+    padding: 30px;
+    border-radius: 12px;
+    margin: 40px auto 20px auto; /* Centre le bloc horizontalement et ajoute de l'espace */
+    max-width: 650px;  /* Largeur idéale */
+    text-align: center; /* Centre le texte et les éléments à l'intérieur */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* Espace propre entre la partie SystemReqs et le bouton télécharger */
+}
+
+.system-check-inner {
+    width: 100%;
 }
 
 .btn-system {
     display: inline-block;
     background-color: #1f6feb;
     color: white;
-    padding: 8px 15px;
+    padding: 10px 20px;
     text-decoration: none;
     border-radius: 6px;
-    margin-top: 8px;
+    margin-top: 12px; /* Espace sous la phrase */
     font-weight: 600;
 }
 
@@ -212,11 +228,15 @@ header h1 {
     display: inline-block;
     background-color: #238636;
     color: white;
-    padding: 12px 25px;
+    padding: 14px 30px;
     text-decoration: none;
     border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
+}
+
+.btn-download-big:hover {
+    background-color: #2ea043;
 }
 
 /* Style des lignes alphabétiques (A, B, C...) */
@@ -246,15 +266,20 @@ header h1 {
 .alpha-games-row .game-card {
     width: 280px;
 }
+
 #alphaWelcomeMsg {
     margin-top: 35px;
 }
-/* --- STYLE POUR LES CARROUSELS D'IMAGES ET DE VIDÉOS --- */
 
-/* --- STYLE POUR LES CARROUSELS D'IMAGES ET DE VIDÉOS (MODE UN PAR UN) --- */
+/* --- STYLE POUR LES CARROUSELS D'IMAGES ET DE VIDÉOS --- */
 
 .media-section {
     margin-bottom: 30px;
+}
+
+.media-section h3 {
+    text-align: center; /* Centre le titre au-dessus du carrousel */
+    margin-bottom: 10px;
 }
 
 .carousel-container {
@@ -326,4 +351,155 @@ header h1 {
 
 .next-btn {
     right: -25px;
+}
+
+/* --- STYLE POUR LA DESCRIPTION (AVEC CADRE) --- */
+
+.detail-info {
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    text-align: left;
+    background-color: #161b22; /* Fond sombre de la carte */
+    border: 1px solid #30363d;  /* Fine bordure discrète */
+    padding: 25px;             /* Espace intérieur pour le texte */
+    border-radius: 12px;       /* Coins arrondis harmonieux */
+}
+
+.detail-info p {
+    line-height: 1.6;
+    color: #c9d1d9;
+    margin: 0;
+}
+
+.detail-info h3 {
+    text-align: center;
+    color: #58a6ff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* --- STYLE DE LA SECTION COMMENTAIRES --- */
+.comments-section {
+    max-width: 650px;
+    margin: 40px auto 0 auto;
+    background: rgba(13, 17, 23, 0.85);
+    border: 1px solid #30363d;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.comments-section h3 {
+    text-align: center;
+    color: #58a6ff;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.comment-form input, 
+.comment-form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    background-color: #161b22;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.comment-form input:focus, 
+.comment-form textarea:focus {
+    border-color: #58a6ff;
+    outline: none;
+}
+
+.btn-comment {
+    align-self: flex-end;
+    background-color: #238636;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-comment:hover {
+    background-color: #2ea043;
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comment-item {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.comment-item strong {
+    color: #58a6ff;
+    font-size: 14px;
+}
+
+.comment-item p {
+    color: #c9d1d9;
+    margin: 8px 0 0 0;
+    font-size: 14px;
+}
+
+/* Bouton de suppression masqué par défaut */
+.comment-item .btn-delete {
+    display: none;
+    background-color: rgba(248, 81, 73, 0.2);
+    color: #f85149;
+    border: 1px solid #f85149;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Dès que le mode admin est activé sur le body, on affiche les boutons de suppression */
+body.admin-logged-in .comment-item .btn-delete {
+    display: inline-block;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Petit lien discret en bas de page pour activer le mode admin */
+.admin-trigger {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.admin-trigger button {
+    background: none;
+    border: none;
+    color: #8b949e;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.admin-trigger button:hover {
+    color: #58a6ff;
 }
