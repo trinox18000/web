@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stalker 2 : Heart of Chornobyl</title>
-    <!-- Ajout de ../ pour le style CSS -->
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
@@ -13,7 +12,7 @@
     <div class="site-container">
         <main>
             <section class="game-details-page">
-                <a href="../index.html" class="back-btn">← Retour</a>
+                <a href="index.html" class="back-btn">← Retour</a>
                 
                 <h2>Stalker 2 : Heart of Chornobyl</h2>
                 
@@ -29,10 +28,9 @@
                     <div class="carousel-container">
                         <button class="carousel-btn prev-btn" onclick="scrollCarousel('imagesScroll', -600)">❮</button>
                         <div class="carousel-track" id="imagesScroll">
-                            <!-- Ajout de ../ pour accéder aux images du dossier assets -->
-                            <img src="../assets/stalker2/images/cover.jpg" alt="Cover">
-                            <img src="../assets/stalker2/images/screenshot-1.jpg" alt="Screenshot 1">
-                            <img src="../assets/stalker2/images/screenshot-2.jpg" alt="Screenshot 2">
+                            <img src="assets/stalker2/images/cover.jpg" alt="Cover">
+                            <img src="assets/stalker2/images/screenshot-1.jpg" alt="Screenshot 1">
+                            <img src="assets/stalker2/images/screenshot-2.jpg" alt="Screenshot 2">
                         </div>
                         <button class="carousel-btn next-btn" onclick="scrollCarousel('imagesScroll', 600)">❯</button>
                     </div>
@@ -46,14 +44,13 @@
                         <div class="carousel-track" id="videosScroll">
                             <div class="carousel-video-item">
                                 <video controls>
-                                    <!-- Ajout de ../ pour les vidéos et sous-titres -->
-                                    <source src="../assets/stalker2/videos/trailer.mp4" type="video/mp4">
-                                    <track src="../assets/stalker2/videos/stalker2 traileur .vtt" kind="subtitles" srclang="fr" label="Français" default>
+                                    <source src="assets/stalker2/videos/trailer.mp4" type="video/mp4">
+                                    <track src="assets/stalker2/videos/stalker2 traileur .vtt" kind="subtitles" srclang="fr" label="Français" default>
                                 </video>
                             </div>
                             <div class="carousel-video-item">
                                 <video controls>
-                                    <source src="../assets/stalker2/videos/gameplay.mp4" type="video/mp4">
+                                    <source src="assets/stalker2/videos/gameplay.mp4" type="video/mp4">
                                 </video>
                             </div>
                         </div>
@@ -92,7 +89,6 @@
         </main>
     </div>
 
-    <!-- Ajout de ../ pour le fichier JS -->
-    <script src="../script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
