@@ -3,7 +3,7 @@
 // ==========================================
 const gamesData = [
     {
-        title: "Stalker 2: Heart of Chornobyl",
+        title: "Stalker 2 : Heart of Chornobyl",
         url: "pages-jeux/stalker2.html",
         image: "assets/stalker2/images/cover.jpg",
         description: "Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie.",
@@ -12,13 +12,13 @@ const gamesData = [
         searchData: "stalker 2 heart of chornobyl"
     },
     {
-        title: "Super Course Auto",
-        url: "pages-jeux/supercourse.html",
-        image: "images/jeu2-cover.jpg",
-        description: "Un jeu de course arcade ultra rapide avec des graphismes modernes.",
-        tag: "Voiture",
-        styleData: "cars",
-        searchData: "super course auto"
+        title: "Beast of Reincarnation",
+        url: "pages-jeux/Beast-of-Reincarnation.html",
+        image: "assets/Beast-of-Reincarnation/images/cover.jpg",
+        description: "description: Explorez un monde post-apocalyptique à travers un voyage aux côtés d'une paria et de son chien, combinant tour par tour et temps réel.",
+        tag: "Action / Aventure / RPG",
+        styleData: "action aventure rpg",
+        searchData: "Beast of Reincarnation"
     }
 ];
 

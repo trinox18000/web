@@ -156,6 +156,13 @@ header h1 {
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid #30363d;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover .media-container img {
+    transform: scale(1.03);
 }
 
 .tag-style {
@@ -325,6 +332,7 @@ header h1 {
     flex-shrink: 0;
     object-fit: cover;
     border: 1px solid #30363d;
+    cursor: pointer; /* Curseur en pointeur pour indiquer que c'est cliquable */
 }
 
 .carousel-video-item {
@@ -669,7 +677,7 @@ body.admin-logged-in .comment-item .btn-delete {
     color: white;
 }
 
-/* Modale */
+/* Modale de base */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -734,6 +742,30 @@ body.admin-logged-in .comment-item .btn-delete {
     background-color: #30363d;
 }
 
+/* --- AJOUT : Visionneuse d'images en grand (Lightbox) --- */
+.image-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    cursor: pointer;
+}
+
+.image-modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
+}
+
 /* --- MISE EN PAGE GLOBALE EN 3 COLONNES --- */
 .page-wrapper {
     display: flex;
@@ -756,10 +788,9 @@ body.admin-logged-in .comment-item .btn-delete {
     height: calc(100vh - 40px);
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, filter 0.3s ease; /* AJOUTÉ : Animation fluide */
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* AJOUTÉ : Effet de zoom et de lueur lumineuse au survol de la pub */
 .side-banner:hover {
     transform: scale(1.03); 
     filter: drop-shadow(0 0 15px rgba(88, 166, 255, 0.7)); 
@@ -776,7 +807,6 @@ body.admin-logged-in .comment-item .btn-delete {
     border-radius: 12px;
 }
 
-/* Conserve la haute qualité et affiche TOUTE l'image sans rogner */
 .my-banner img {
     width: 100% !important;
     height: 100% !important;
@@ -786,7 +816,6 @@ body.admin-logged-in .comment-item .btn-delete {
     border-radius: 12px;
 }
 
-/* Masque les bannières latérales sur les petits écrans pour éviter de casser le design */
 @media (max-width: 1200px) {
     .side-banner {
         display: none;
