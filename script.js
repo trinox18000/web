@@ -17,8 +17,16 @@ document.addEventListener("DOMContentLoaded", function() {
     loadGameComments(); // Charge uniquement les commentaires de ce jeu
 });
 
-// Fonction pour faire défiler les carrousels (images et vidéos)
+// Fonction pour faire défiler les carrousels (images et vidéos) et couper les vidéos
 function scrollCarousel(containerId, distance) {
+    // 1. Coupe et remet à zéro toutes les vidéos présentes sur la page
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+    });
+
+    // 2. Fait défiler le carrousel normalement
     const container = document.getElementById(containerId);
     if (container) {
         container.scrollBy({
