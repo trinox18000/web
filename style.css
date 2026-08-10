@@ -31,8 +31,8 @@ header {
     text-align: center;
     gap: 20px;
     margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #30363d;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 header h1 {
@@ -528,26 +528,33 @@ body.admin-logged-in .comment-item .btn-delete {
     color: #58a6ff;
 }
 
-/* En-tête bannière ajusté pour afficher l'image complète sans la rogner */
+
+/* Bannière collée au millimètre près autour de l'image */
 .banner-header {
     width: 100%;
-    max-width: 1400px;
-    height: 244px; /* On réduit la hauteur de la boîte pour qu'elle colle parfaitement à l'image */
-    margin: 30px auto 25px auto;
+    margin: 20px auto 25px auto;
+    text-align: center; /* Centre la bannière */
+    line-height: 0;
+}
+
+.banner-header a {
+    display: inline-block; /* S'adapte exactement aux dimensions de l'image */
+    max-width: 100%;
+    line-height: 0;
     border-radius: 16px;
-    overflow: hidden;
-    background-color: #161b22;
-    border: 1px solid #30363d;
+    border: 1px solid #30363d; /* Bordure collée à l'image */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 }
 
 .banner-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    object-position: center 30%; /* Décale légèrement l'image vers le haut pour faire remonter le logo "GAMES" et supprimer le vide du bas */
+    max-width: 100%;
+    height: auto;
     display: block;
-    border-radius: 16px;
+    margin: 0;
+    padding: 0;
+    border: none; /* La bordure est gérée par le lien parent */
 }
 
 /* Pagination */
