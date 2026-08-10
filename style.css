@@ -532,7 +532,7 @@ body.admin-logged-in .comment-item .btn-delete {
 .banner-header {
     width: 100%;
     max-width: 1400px;
-    height: 180px; /* Ajuste cette valeur si tu veux que ce soit un tout petit peu plus haut ou plus bas */
+    height: 200px; /* On ajuste la hauteur pour mieux cadrer */
     margin: 30px auto 25px auto;
     border-radius: 16px;
     overflow: hidden;
@@ -544,8 +544,7 @@ body.admin-logged-in .comment-item .btn-delete {
 .banner-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Étire et ajuste l'image pour qu'elle remplisse tout le cadre à fleur */
-    object-position: center;
+    object-fit: fill; /* Étire l'image juste ce qu'il faut pour qu'elle rentre entièrement sans couper les bords */
     display: block;
     border-radius: 16px;
 }
