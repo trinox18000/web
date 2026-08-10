@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRINOX PROJECT GAMES</title>
     <link rel="icon" type="image/png" href="assets/logo site/images/favicon.png">
-    <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-	<link rel="stylesheet" href="style.css?v=2.0">
+    <!-- CSS conservé unique avec versioning pour le cache -->
+    <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 <body>
 
@@ -61,11 +61,11 @@
 
                 <!-- Liste Alphabétique (A-Z) -->
                 <div id="alphaFilters" class="filter-row" style="display: none; flex-wrap: wrap;">
-                    <button class="filter-btn active" onclick="filterByLetter('all', event)">Tous</button>
+                    <button class="filter-btn active" onclick="handleLetterFilter('all', event)">Tous</button>
                     <script>
                         const letters = "abcdefghijklmnopqrstuvwxyz".split("");
                         letters.forEach(l => {
-                            document.write(`<button class="filter-btn" onclick="filterByLetter('${l}', event)">${l.toUpperCase()}</button>`);
+                            document.write(`<button class="filter-btn" onclick="handleLetterFilter('${l}', event)">${l.toUpperCase()}</button>`);
                         });
                     </script>
                 </div>
