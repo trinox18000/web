@@ -8,13 +8,134 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <!-- CSS conservé unique avec versioning pour le cache -->
     <link rel="stylesheet" href="style.css?v=2.0">
+    
+    <style>
+        /* Style du mini-bandeau en haut */
+        .top-notice {
+            background-color: #232730;
+            border-left: 4px solid #ffcc00;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-notice button {
+            background: none;
+            border: none;
+            color: #ffcc00;
+            text-decoration: underline;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .top-notice button:hover {
+            color: #ffffff;
+        }
+
+        /* --- FENÊTRE POPUP EN SURVOL (MODALE) --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            background-color: #1a1d24;
+            border: 2px solid #ffcc00;
+            border-radius: 12px;
+            max-width: 850px;
+            width: 90%;
+            padding: 35px;
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            text-align: center;
+            position: relative;
+            box-shadow: 0px 10px 40px rgba(0,0,0,0.9);
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #aaaaaa;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close-modal-btn:hover {
+            color: #ffcc00;
+        }
+
+        .modal-content h3 {
+            color: #ffffff;
+            margin-top: 0;
+            font-size: 26px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #2d323e;
+            padding-bottom: 15px;
+        }
+
+        .modal-content p {
+            margin-bottom: 20px;
+            color: #d1d5db;
+        }
+
+        /* LE VERT SÉCURITÉ ICI (#00ff88) */
+        .modal-content strong.key-highlight {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .modal-content .highlight-text {
+            color: #ffcc00;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .modal-content .support-text {
+            background-color: #232730;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 17px;
+            color: #ffffff;
+            border: 1px solid #2d323e;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- CONTENEUR GLOBAL EN 3 COLONNES (Bannière gauche | Site | Bannière droite) -->
+    <!-- CONTENEUR GLOBAL EN 3 COLONNES -->
     <div class="page-wrapper">
         
-        <!-- BANNIÈRE GAUCHE (Image fixe affiliation) -->
+        <!-- BANNIÈRE GAUCHE -->
         <aside class="side-banner">
             <a href="https://www.instant-gaming.com/fr/?igr=TRINOX18" target="_blank" class="my-banner">
                 <img src="assets/logo site/images/ma-banniere-perso.jpg" alt="Instant Gaming - Trinox18">
@@ -31,13 +152,19 @@
                 </a>
             </header>
 
-            <!-- MENU PRINCIPAL (Accueil + Jeux PC) -->
+            <!-- MENU PRINCIPAL -->
             <nav class="main-menu" style="display: flex; gap: 10px; margin-bottom: 20px;">
                 <button class="main-btn active" id="accueilBtn" onclick="showAccueil()">🏠 Accueil</button>
                 <button class="main-btn" id="jeuxPcBtn" onclick="showJeuxPC()">Jeux PC 🎮</button>
             </nav>
 
-            <!-- SOUS-MENU (Caché par défaut) -->
+            <!-- MINI-BANDEAU EN HAUT -->
+            <div class="top-notice">
+                <span>⚠️ <strong>Note aux visiteurs :</strong> Ce site sert de démo pour tester les jeux. Si un jeu vous plaît, achetez-le !</span>
+                <button onclick="openAboutModal()">En savoir plus ↓</button>
+            </div>
+
+            <!-- SOUS-MENU -->
             <div class="sub-menu-container" id="subMenuContainer" style="display: none;">
                 <div class="mode-selectors">
                     <button class="mode-btn active" onclick="setBrowseMode('style')">Par Style</button>
@@ -71,22 +198,22 @@
                 </div>
             </div>
 
-            <!-- CONTENU : LISTE DES JEUX GENEREE PAR GAMES.JS -->
+            <!-- CONTENU : LISTE DES JEUX -->
             <main>
                 <section class="games-grid" id="gamesContainer">
-                    <!-- Les cartes sont générées automatiquement par games.js ! -->
+                    <!-- Généré automatiquement par games.js -->
                 </section>
             </main>
 
             <!-- SECTION DES DERNIERS COMMENTAIRES -->
-            <section class="recent-comments-section" style="margin-top: 40px;">
+            <section class="recent-comments-section" style="margin-top: 40px; margin-bottom: 40px;">
                 <h2>💬 Derniers commentaires</h2>
                 <div id="recentCommentsContainer" class="recent-comments-grid"></div>
             </section>
 
         </div>
 
-        <!-- BANNIÈRE DROITE (Image fixe affiliation) -->
+        <!-- BANNIÈRE DROITE -->
         <aside class="side-banner">
             <a href="https://www.instant-gaming.com/fr/?igr=TRINOX18" target="_blank" class="my-banner">
                 <img src="assets/logo site/images/ma-banniere-perso.jpg" alt="Instant Gaming - Trinox18">
@@ -95,12 +222,52 @@
 
     </div>
 
-    <!-- SCRIPT QUI GÉNÈRE LES JEUX EN PREMIER -->
+    <!-- FENÊTRE POPUP (MODALE SURVOL) -->
+    <div id="aboutModal" class="modal-overlay" onclick="closeAboutModalOnOverlay(event)">
+        <div class="modal-content">
+            <button class="close-modal-btn" onclick="closeAboutModal()">&times;</button>
+            <h3>⚠️ À propos de notre démarche et sécurité</h3>
+            
+            <p>
+                Les démos gratuites se faisant rares aujourd'hui, ce site vous permet de tester des jeux sur votre 
+                configuration via des versions alternatives, ou de retrouver un accès si vous avez perdu vos licences.
+            </p>
+            
+            <p>
+                Pour <strong class="key-highlight">garantir votre sécurité</strong>, nous vous fournissons directement les liens finaux des 
+                hébergeurs afin de vous éviter les sites tiers remplis de publicités malveillantes ou de virus. 
+                <br><strong class="key-highlight">Aucun fichier n'est stocké ou hébergé sur nos serveurs</strong>, nous ne faisons que partager des liens externes existants.
+            </p>
+            
+            <p class="highlight-text">
+                Si le jeu vous plaît, merci de l'acheter !<br>
+                C'est indispensable pour soutenir les développeurs qui créent vos jeux préférés.
+            </p>
+            
+            <div class="support-text">
+                💡 <strong>Pour soutenir le site :</strong> N'hésitez pas à passer par nos liens <strong>Instant Gaming</strong> lorsque vous achetez vos jeux officiels.
+            </div>
+        </div>
+    </div>
+
     <script src="games.js"></script>
 
-    <!-- LOGIQUE ET FILTRES -->
     <script>
         let currentMode = 'style';
+
+        function openAboutModal() {
+            document.getElementById('aboutModal').style.display = 'flex';
+        }
+
+        function closeAboutModal() {
+            document.getElementById('aboutModal').style.display = 'none';
+        }
+
+        function closeAboutModalOnOverlay(event) {
+            if (event.target.id === 'aboutModal') {
+                closeAboutModal();
+            }
+        }
 
         function showAccueil() {
             document.getElementById('accueilBtn').classList.add('active');
