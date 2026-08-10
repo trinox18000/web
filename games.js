@@ -2,6 +2,16 @@
 // LISTE DES JEUX (AJOUTE LES NOUVEAUX EN HAUT)
 // ==========================================
 const gamesData = [
+
+	{
+        title: "Exo Rally Championship",
+        url: "pages-jeux/Exo-Rally-Championship.html",
+        image: "assets/Exo-Rally-Championship/images/cover.jpg",
+        description: "Simulateur de rallye tout-terrain extrême sur des planètes extraterrestres avec physique réaliste, propulseurs RCS et environnements générés de manière procédurale.",
+        tag: "Voiture / Course / Simulation",
+        styleData: "simulation cars",
+        searchData: "Exo Rally Championship"
+    },
     {
         title: "Stalker 2 : Heart of Chornobyl",
         url: "pages-jeux/stalker2.html",
