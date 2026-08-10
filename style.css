@@ -882,3 +882,57 @@ body.admin-logged-in .comment-item .btn-delete {
     background-color: #f85149;
     color: white;
 }
+
+/* --- ADAPTATION MOBILE (POUR TOUS LES TÉLÉPHONES) --- */
+@media (max-width: 768px) {
+    /* Cache les bannières publicitaires gauche/droite sur téléphone */
+    .side-banner {
+        display: none !important;
+    }
+
+    /* Fait prendre toute la largeur au conteneur principal */
+    .page-wrapper {
+        padding: 5px !important;
+        flex-direction: column;
+    }
+
+    .site-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 10px !important;
+        margin: 0 !important;
+    }
+
+    /* Adapte la page de détail du jeu pour qu'elle tienne sur l'écran */
+    .game-details-page {
+        padding: 15px !important;
+        border-radius: 8px;
+    }
+
+    /* Redimensionne les carrousels d'images et vidéos pour le tactile */
+    .carousel-container {
+        max-width: 100% !important;
+    }
+
+    .carousel-track img, 
+    .carousel-track video,
+    .carousel-video-item video {
+        height: 220px !important; /* Plus adapté aux petits écrans */
+    }
+
+    /* Ajuste les boutons de téléchargement pour qu'ils ne dépassent pas */
+    .download-options {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-download {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Réduit la taille des grands titres si besoin */
+    .game-details-page h2 {
+        font-size: 22px !important;
+    }
+}
