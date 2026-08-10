@@ -42,15 +42,45 @@ header h1 {
     cursor: pointer;
 }
 
-#searchInput {
-    padding: 12px 18px;
-    width: 320px;
-    border-radius: 8px;
-    border: 1px solid #30363d;
-    background-color: #161b22;
-    color: white;
-    font-size: 14px;
+/* --- BARRE DE RECHERCHE --- */
+.search-container {
+    margin-bottom: 25px;
     text-align: center;
+}
+
+.search-wrapper {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #aaaaaa;
+}
+
+#searchInput {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 20px 14px 50px;
+    border-radius: 30px;
+    border: 2px solid #30363d;
+    background-color: #1a1d24;
+    color: #ffffff;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-align: left;
+}
+
+#searchInput:focus {
+    border-color: #00ff88;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
 }
 
 /* Menus centrés */
@@ -90,7 +120,7 @@ header h1 {
     margin-bottom: 15px;
 }
 
-/* MODIFICATION : Aligne les styles en multi-lignes centrées exactement comme l'alphabet */
+/* Aligne les styles en multi-lignes centrées exactement comme l'alphabet */
 .filter-row {
     display: flex;
     justify-content: center;
@@ -528,21 +558,20 @@ body.admin-logged-in .comment-item .btn-delete {
     color: #58a6ff;
 }
 
-
 /* Bannière collée au millimètre près autour de l'image */
 .banner-header {
     width: 100%;
     margin: 20px auto 25px auto;
-    text-align: center; /* Centre la bannière */
+    text-align: center;
     line-height: 0;
 }
 
 .banner-header a {
-    display: inline-block; /* S'adapte exactement aux dimensions de l'image */
+    display: inline-block;
     max-width: 100%;
     line-height: 0;
     border-radius: 16px;
-    border: 1px solid #30363d; /* Bordure collée à l'image */
+    border: 1px solid #30363d;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     overflow: hidden;
 }
@@ -554,7 +583,7 @@ body.admin-logged-in .comment-item .btn-delete {
     display: block;
     margin: 0;
     padding: 0;
-    border: none; /* La bordure est gérée par le lien parent */
+    border: none;
 }
 
 /* Pagination */
@@ -686,7 +715,7 @@ body.admin-logged-in .comment-item .btn-delete {
     color: white;
 }
 
-/* Modale */
+/* Modale de confirmation (liens morts) */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -751,7 +780,7 @@ body.admin-logged-in .comment-item .btn-delete {
     background-color: #30363d;
 }
 
-/* --- MISE EN PAGE GLOBALE EN 3 COLONNES --- */
+/* MISE EN PAGE GLOBALE EN 3 COLONNES */
 .page-wrapper {
     display: flex;
     justify-content: center;
@@ -807,7 +836,7 @@ body.admin-logged-in .comment-item .btn-delete {
     }
 }
 
-/* --- Style de la modale Lightbox pour les images --- */
+/* Style de la modale Lightbox pour les images */
 .image-modal-overlay {
     position: fixed;
     top: 0;
@@ -888,14 +917,12 @@ body.admin-logged-in .comment-item .btn-delete {
     color: white;
 }
 
-/* --- ADAPTATION MOBILE (POUR TOUS LES TÉLÉPHONES) --- */
+/* ADAPTATION MOBILE */
 @media (max-width: 768px) {
-    /* Cache les bannières publicitaires gauche/droite sur téléphone */
     .side-banner {
         display: none !important;
     }
 
-    /* Fait prendre toute la largeur au conteneur principal */
     .page-wrapper {
         padding: 5px !important;
         flex-direction: column;
@@ -908,7 +935,6 @@ body.admin-logged-in .comment-item .btn-delete {
         margin: 0 !important;
     }
 
-    /* Force la grille des jeux à n'afficher qu'une seule colonne en mode flexible */
     .games-grid {
         display: flex !important;
         flex-direction: column !important;
@@ -918,20 +944,17 @@ body.admin-logged-in .comment-item .btn-delete {
         margin-top: 20px !important;
     }
 
-    /* Force chaque carte de jeu à prendre 100% de l'écran mobile */
     .games-grid .game-card {
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 !important;
     }
 
-    /* Adapte la page de détail du jeu pour qu'elle tienne sur l'écran */
     .game-details-page {
         padding: 15px !important;
         border-radius: 8px;
     }
 
-    /* Redimensionne les carrousels d'images et vidéos pour le tactile */
     .carousel-container {
         max-width: 100% !important;
     }
@@ -942,7 +965,6 @@ body.admin-logged-in .comment-item .btn-delete {
         height: 220px !important;
     }
 
-    /* Ajuste les boutons de téléchargement pour qu'ils ne dépassent pas */
     .download-options {
         flex-direction: column;
         width: 100%;
@@ -953,8 +975,165 @@ body.admin-logged-in .comment-item .btn-delete {
         text-align: center;
     }
 
-    /* Réduit la taille des grands titres si besoin */
     .game-details-page h2 {
         font-size: 22px !important;
     }
+}
+
+/* --- STYLE DU MINI-BANDEAU ET DE SA GRANDE MODALE (SÉCURISÉ SANS CONFLIT) --- */
+.top-notice {
+    background-color: #232730;
+    border-left: 4px solid #ffcc00;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-notice button {
+    background: none;
+    border: none;
+    color: #ffcc00;
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.top-notice button:hover {
+    color: #ffffff;
+}
+
+/* --- STYLE DU MINI-BANDEAU EN HAUT --- */
+.top-notice {
+    background-color: #232730;
+    border-left: 4px solid #ffcc00;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-notice button {
+    background: none;
+    border: none;
+    color: #ffcc00;
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.top-notice button:hover {
+    color: #ffffff;
+}
+
+/* --- FENÊTRE POPUP EN SURVOL (MODALE) - DESIGN EXACT --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background-color: #12151a;
+    border: 2px solid #ffcc00;
+    border-radius: 16px;
+    max-width: 900px;
+    width: 90%;
+    padding: 40px;
+    color: #e6edf3;
+    font-size: 18px; /* Texte général augmenté (était 16px) */
+    line-height: 1.8;
+    text-align: center;
+    position: relative;
+    box-shadow: 0px 10px 40px rgba(0,0,0,0.9);
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: none;
+    border: none;
+    color: #8b949e;
+    font-size: 30px; /* Croix agrandie */
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-modal-btn:hover {
+    color: #ffcc00;
+}
+
+.modal-content h3 {
+    color: #ffffff;
+    margin-top: 0;
+    font-size: 26px; /* Titre agrandi (était 22px) */
+    margin-bottom: 25px;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    color: #c9d1d9;
+    font-size: 18px; /* Paragraphes agrandis */
+}
+
+/* --- LE VERT SÉCURITÉ EXACT --- */
+.modal-content strong.key-highlight,
+.modal-content p strong {
+    color: #00ff88 !important;
+    font-weight: bold;
+}
+
+/* --- LA PHRASE JAUNE CENTRALE --- */
+.modal-content .highlight-text {
+    color: #ffcc00 !important;
+    font-size: 21px !important; /* Phrase centrale agrandie (était 20px) */
+    font-weight: bold;
+    margin: 25px 0 !important;
+    display: block;
+}
+
+/* --- LE BLOC GRIS DU BAS POUR INSTANT GAMING --- */
+.modal-content .support-text {
+    background-color: #1a1d24;
+    padding: 18px 22px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 17px; /* Texte du bas agrandi */
+    color: #e6edf3;
+    border: 1px solid #30363d;
 }

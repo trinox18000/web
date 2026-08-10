@@ -1,12 +1,82 @@
+// --- 1. GESTION DE LA MODALE & DU MENU ---
+let currentMode = 'style';
+
+function openAboutModal() {
+    document.getElementById('aboutModal').style.display = 'flex';
+}
+
+function closeAboutModal() {
+    document.getElementById('aboutModal').style.display = 'none';
+}
+
+function closeAboutModalOnOverlay(event) {
+    if (event.target.id === 'aboutModal') {
+        closeAboutModal();
+    }
+}
+
+function showAccueil() {
+    document.getElementById('accueilBtn').classList.add('active');
+    document.getElementById('jeuxPcBtn').classList.remove('active');
+    document.getElementById('subMenuContainer').style.display = 'none';
+    filterByStyle('all');
+}
+
+function showJeuxPC() {
+    document.getElementById('jeuxPcBtn').classList.add('active');
+    document.getElementById('accueilBtn').classList.remove('active');
+    document.getElementById('subMenuContainer').style.display = 'block';
+    setBrowseMode('style');
+}
+
+function setBrowseMode(mode) {
+    currentMode = mode;
+    const styleBtn = document.querySelectorAll('.mode-btn')[0];
+    const alphaBtn = document.querySelectorAll('.mode-btn')[1];
+    const styleFilters = document.getElementById('styleFilters');
+    const alphaFilters = document.getElementById('alphaFilters');
+
+    if (mode === 'style') {
+        styleBtn.classList.add('active');
+        alphaBtn.classList.remove('active');
+        styleFilters.style.display = 'flex';
+        alphaFilters.style.display = 'none';
+        filterByStyle('all');
+    } else {
+        alphaBtn.classList.add('active');
+        styleBtn.classList.remove('active');
+        alphaFilters.style.display = 'flex';
+        styleFilters.style.display = 'none';
+        filterByLetter('all');
+    }
+}
+
+function handleStyleFilter(style, evt) {
+    if (evt) {
+        document.querySelectorAll('#styleFilters .filter-btn').forEach(btn => btn.classList.remove('active'));
+        evt.target.classList.add('active');
+    }
+    filterByStyle(style);
+}
+
+function handleLetterFilter(letter, evt) {
+    if (evt) {
+        document.querySelectorAll('#alphaFilters .filter-btn').forEach(btn => btn.classList.remove('active'));
+        evt.target.classList.add('active');
+    }
+    filterByLetter(letter);
+}
+
+
+// --- 2. GESTION FAVICON, ADMIN, COMMENTAIRES ET LIGHTBOX ---
+
 // Injection automatique du Favicon sur toutes les pages
 (function() {
     let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
     link.type = 'image/png';
     link.rel = 'icon';
-    // Détecte si on est dans un sous-dossier (comme pages-jeux/) ou à la racine
     let isSubFolder = window.location.pathname.includes('/pages-jeux/');
     link.href = isSubFolder ? '../assets/logo site/images/favicon.png' : 'assets/logo site/images/favicon.png';
-    
     document.getElementsByTagName('head')[0].appendChild(link);
 })();
 
@@ -16,6 +86,8 @@ let isAdminMode = false;
 let currentCaptchaAnswer = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
+    showAccueil(); // Lancer l'accueil au chargement
+    
     emailjs.init({ publicKey: "_KJIQgzKnZEuNb72R" });
 
     const adminTriggerContainer = document.createElement('div');
@@ -26,20 +98,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     generateCaptcha(); 
     renderRecentComments();
-    loadGameComments(); // Charge uniquement les commentaires de ce jeu
-    initImageLightbox(); // Initialise la visionneuse d'images au chargement
+    loadGameComments(); 
+    initImageLightbox(); 
 });
 
-// Fonction pour faire défiler les carrousels (images et vidéos) et couper les vidéos
+// Fonction pour faire défiler les carrousels
 function scrollCarousel(containerId, distance) {
-    // 1. Coupe et remet à zéro toutes les vidéos présentes sur la page
     const videos = document.querySelectorAll('video');
     videos.forEach(video => {
         video.pause();
         video.currentTime = 0;
     });
 
-    // 2. Fait défiler le carrousel normalement
     const container = document.getElementById(containerId);
     if (container) {
         container.scrollBy({
@@ -64,7 +134,6 @@ function toggleAdminMode() {
             isAdminMode = true;
             document.body.classList.add('admin-logged-in');
             alert("Mode Admin activé !");
-            // Rafraîchit les listes pour afficher les boutons de suppression
             loadGameComments();
             renderRecentComments();
         } else if (password !== null) {
@@ -74,13 +143,11 @@ function toggleAdminMode() {
         isAdminMode = false;
         document.body.classList.remove('admin-logged-in');
         alert("Mode Admin désactivé.");
-        // Rafraîchit les listes pour masquer les boutons
         loadGameComments();
         renderRecentComments();
     }
 }
 
-// Fonction pour ajouter un commentaire
 function addComment(event, gameTitle = "Jeu", gameUrl = "#") {
     event.preventDefault();
 
@@ -109,12 +176,10 @@ function addComment(event, gameTitle = "Jeu", gameUrl = "#") {
         date: new Date().toLocaleDateString('fr-FR')
     };
 
-    // Sauvegarde globale dans le LocalStorage
     let comments = JSON.parse(localStorage.getItem('siteComments')) || [];
     comments.unshift(newComment);
-    localStorage.setItem('siteComments', JSON.stringify(comments)); // On garde tout l'historique global
+    localStorage.setItem('siteComments', JSON.stringify(comments));
 
-    // Notification EmailJS
     emailjs.send("service_5dyx1td", "template_s3bbiv5", {
         name: author,
         message: `${gameTitle} : ${text}`
@@ -124,26 +189,22 @@ function addComment(event, gameTitle = "Jeu", gameUrl = "#") {
         textInput.value = '';
         captchaInput.value = ''; 
         generateCaptcha();
-        loadGameComments(); // Recharge la liste propre à cette page
-        renderRecentComments(); // Recharge la liste de l'accueil
+        loadGameComments(); 
+        renderRecentComments(); 
     }, (error) => {
         alert("Erreur lors de l'envoi.");
         console.error(error);
     });
 }
 
-// Affiche uniquement les commentaires du jeu de la page actuelle
 function loadGameComments() {
     const commentsList = document.getElementById('commentsList');
     if (!commentsList) return;
 
     const comments = JSON.parse(localStorage.getItem('siteComments')) || [];
-    
-    // Récupère le titre exact de la page (ex: "Stalker 2 : Heart of Chornobyl")
     const gameTitleElement = document.querySelector('h2');
     const currentGame = gameTitleElement ? gameTitleElement.textContent.trim() : "";
 
-    // FILTRE : Ne garde que les commentaires dont le gameTitle correspond à cette page
     const gameComments = comments.filter(c => c.gameTitle === currentGame);
 
     commentsList.innerHTML = gameComments.map(comment => `
@@ -157,7 +218,6 @@ function loadGameComments() {
     `).join('');
 }
 
-// Supprimer un commentaire proprement du stockage global
 function deleteGameComment(author, text) {
     if (!isAdminMode) {
         alert("Mode admin requis pour supprimer un commentaire.");
@@ -170,7 +230,6 @@ function deleteGameComment(author, text) {
     renderRecentComments();
 }
 
-// Fonction pour afficher les 10 derniers commentaires sur la page d'accueil
 function renderRecentComments() {
     const commentsContainer = document.getElementById('recentCommentsContainer');
     if (!commentsContainer) return;
@@ -252,7 +311,6 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, m => map[m]);
 } 
 
-// Fonction de la visionneuse d'images en plein écran (Lightbox) avec navigation et protection
 function initImageLightbox() {
     const trackImages = document.querySelectorAll('.carousel-track img');
 
