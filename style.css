@@ -182,7 +182,6 @@ header h1 {
 
 /* Page de détail */
 .game-details-page {
-    background-image: linear-gradient(rgba(13, 17, 23, 0.60), rgba(13, 17, 23, 0.60)), url('assets/stalker2/images/S2HoC_GSCGameWorld_Duga.png');
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
