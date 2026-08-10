@@ -1,5 +1,11 @@
 * {
     box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
 }
 
 body {
@@ -332,7 +338,6 @@ header h1 {
     flex-shrink: 0;
     object-fit: cover;
     border: 1px solid #30363d;
-    cursor: pointer; /* Curseur en pointeur pour indiquer que c'est cliquable */
 }
 
 .carousel-video-item {
@@ -677,7 +682,7 @@ body.admin-logged-in .comment-item .btn-delete {
     color: white;
 }
 
-/* Modale de base */
+/* Modale */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -742,30 +747,6 @@ body.admin-logged-in .comment-item .btn-delete {
     background-color: #30363d;
 }
 
-/* --- AJOUT : Visionneuse d'images en grand (Lightbox) --- */
-.image-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    cursor: pointer;
-}
-
-.image-modal-content {
-    max-width: 90%;
-    max-height: 90vh;
-    object-fit: contain;
-    border-radius: 8px;
-    border: 1px solid #30363d;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
-}
-
 /* --- MISE EN PAGE GLOBALE EN 3 COLONNES --- */
 .page-wrapper {
     display: flex;
@@ -773,15 +754,15 @@ body.admin-logged-in .comment-item .btn-delete {
     align-items: stretch;
     gap: 20px;
     width: 100%;
-    max-width: 1800px;
+    max-width: 1920px;
     margin: 0 auto;
-    padding: 0 10px;
+    padding: 0 15px;
     min-height: 100vh;
 }
 
 /* Style des bannières latérales gauche et droite */
 .side-banner {
-    width: 200px;
+    width: 160px;
     flex-shrink: 0;
     position: sticky;
     top: 20px;
@@ -820,4 +801,85 @@ body.admin-logged-in .comment-item .btn-delete {
     .side-banner {
         display: none;
     }
+}
+
+/* --- Style de la modale Lightbox pour les images --- */
+.image-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    cursor: pointer;
+    padding: 20px;
+}
+
+.image-modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Boutons de navigation et de fermeture dans la Lightbox */
+.lightbox-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(22, 27, 34, 0.8);
+    color: #58a6ff;
+    border: 1px solid #30363d;
+    font-size: 24px;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 2001;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.lightbox-nav-btn:hover {
+    background-color: #1f6feb;
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+    left: 30px;
+}
+
+.lightbox-next {
+    right: 30px;
+}
+
+.lightbox-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background-color: rgba(22, 27, 34, 0.8);
+    color: #f85149;
+    border: 1px solid #30363d;
+    font-size: 20px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 2001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s, color 0.3s;
+}
+
+.lightbox-close-btn:hover {
+    background-color: #f85149;
+    color: white;
 }
