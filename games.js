@@ -7,8 +7,8 @@ const gamesData = [
         url: "pages-jeux/stalker2.html",
         image: "assets/stalker2/images/cover.jpg",
         description: "Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie.",
-        tag: "Survie / FPS",
-        styleData: "survival fps",
+        tag: "Survie / FPS / Horreur",
+        styleData: "survival fps horror",
         searchData: "stalker 2 heart of chornobyl"
     },
     {
