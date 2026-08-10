@@ -532,22 +532,20 @@ body.admin-logged-in .comment-item .btn-delete {
 .banner-header {
     width: 100%;
     max-width: 1400px;
-    height: auto; /* Laisse la hauteur s'adapter automatiquement selon l'image */
+    height: 180px; /* Ajuste cette valeur si tu veux que ce soit un tout petit peu plus haut ou plus bas */
     margin: 30px auto 25px auto;
     border-radius: 16px;
     overflow: hidden;
     background-color: #161b22;
     border: 1px solid #30363d;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .banner-img {
     width: 100%;
-    height: auto;
-    object-fit: contain; /* Affiche toute l'image en entier sans la couper */
+    height: 100%;
+    object-fit: cover; /* Étire et ajuste l'image pour qu'elle remplisse tout le cadre à fleur */
+    object-position: center;
     display: block;
     border-radius: 16px;
 }
