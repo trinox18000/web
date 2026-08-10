@@ -1,34 +1,19 @@
-/* --- STRUCTURE GLOBALE --- */
 * {
     box-sizing: border-box;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0d1117 !important; /* Fond sombre forcé */
-    color: #e6edf3 !important; /* Texte clair forcé */
+    background-color: #0d1117 !important;
+    color: #e6edf3 !important;
     margin: 0;
     padding: 0;
 }
 
-/* NOUVEAU : Enveloppe globale pour centrer les bannières et le site */
-.page-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
-    width: 100%;
-    max-width: 1760px;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
 .site-container {
-    flex-grow: 1;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 30px 0;
+    padding: 30px 20px;
 }
 
 /* En-tête centré */
@@ -101,9 +86,9 @@ header h1 {
 .filter-row {
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap; /* Empêche le retour à la ligne forcé */
-    overflow-x: auto; /* Sécurité si l'écran est plus petit */
-    gap: 4px; /* Espace optimisé entre les boutons pour tout aligner */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 4px;
     padding: 10px 15px;
 }
 
@@ -111,7 +96,7 @@ header h1 {
     background-color: #21262d;
     color: #c9d1d9;
     border: 1px solid #30363d;
-    padding: 8px 10px; /* Padding ajusté pour gagner de la place */
+    padding: 8px 10px;
     border-radius: 20px;
     cursor: pointer;
     white-space: nowrap;
@@ -131,7 +116,7 @@ header h1 {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
-    margin-top: 35px; /* Ajoute un bel espace bien aéré ici */
+    margin-top: 35px;
 }
 
 .game-card {
@@ -181,13 +166,13 @@ header h1 {
     width: fit-content;
 }
 
-/* Page de détail (Stalker 2 uniquement) */
+/* Page de détail */
 .game-details-page {
     background-image: linear-gradient(rgba(13, 17, 23, 0.60), rgba(13, 17, 23, 0.60)), url('assets/stalker2/images/S2HoC_GSCGameWorld_Duga.png');
-    background-size: cover;     /* Remplit tout le bloc de la page de détail */
+    background-size: cover;
     background-attachment: fixed;
-    background-repeat: no-repeat;    /* Pas de répétition */
-    background-position: center;     /* Centré proprement */
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: #161b22;
     border: 1px solid #30363d;
     padding: 30px;
@@ -199,7 +184,7 @@ header h1 {
     color: #c9d1d9;
     border: 1px solid #30363d;
     padding: 8px 16px;
-    border-radius: 20px; /* Des bords arrondis assortis au reste ! */
+    border-radius: 20px;
     cursor: pointer;
     margin-bottom: 20px;
     font-weight: 600;
@@ -225,19 +210,19 @@ header h1 {
     border: 1px solid #30363d;
 }
 
-/* UN SEUL GRAND CADRE UNIQUE POUR CONFIG & TÉLÉCHARGEMENT */
+/* Cadre Config & Téléchargement */
 .system-check-box {
-    background: rgba(13, 17, 23, 0.85); /* Légèrement transparent pour voir le fond Duga */
+    background: rgba(13, 17, 23, 0.85);
     border: 1px solid #30363d;
     padding: 30px;
     border-radius: 12px;
-    margin: 40px auto 20px auto; /* Centre le bloc horizontalement et ajoute de l'espace */
-    max-width: 650px;  /* Largeur idéale */
-    text-align: center; /* Centre le texte et les éléments à l'intérieur */
+    margin: 40px auto 20px auto;
+    max-width: 650px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px; /* Espace propre entre la partie SystemReqs et le bouton télécharger */
+    gap: 30px;
 }
 
 .system-check-inner {
@@ -251,7 +236,7 @@ header h1 {
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 6px;
-    margin-top: 12px; /* Espace sous la phrase */
+    margin-top: 12px;
     font-weight: 600;
 }
 
@@ -270,7 +255,7 @@ header h1 {
     background-color: #2ea043;
 }
 
-/* Style des lignes alphabétiques (A, B, C...) */
+/* Lignes alphabétiques */
 .alpha-line-group {
     margin-bottom: 30px;
     background-color: #161b22;
@@ -302,14 +287,13 @@ header h1 {
     margin-top: 35px;
 }
 
-/* --- STYLE POUR LES CARROUSELS D'IMAGES ET DE VIDÉOS --- */
-
+/* Carrousels */
 .media-section {
     margin-bottom: 30px;
 }
 
 .media-section h3 {
-    text-align: center; /* Centre le titre au-dessus du carrousel */
+    text-align: center;
     margin-bottom: 10px;
 }
 
@@ -317,14 +301,14 @@ header h1 {
     position: relative;
     display: flex;
     align-items: center;
-    max-width: 600px; /* Limite la largeur du lecteur pour que ce soit bien centré et propre */
+    max-width: 600px;
     margin: 0 auto;
 }
 
 .carousel-track {
     display: flex;
     gap: 0;
-    overflow: hidden; /* C'est ça qui cache tout le reste et n'affiche qu'un seul élément */
+    overflow: hidden;
     scroll-behavior: smooth;
     width: 100%;
 }
@@ -356,7 +340,6 @@ header h1 {
     border: 1px solid #30363d;
 }
 
-/* Boutons fléchés du carrousel */
 .carousel-btn {
     position: absolute;
     z-index: 10;
@@ -384,16 +367,15 @@ header h1 {
     right: -25px;
 }
 
-/* --- STYLE POUR LA DESCRIPTION (AVEC CADRE) --- */
-
+/* Description */
 .detail-info {
     max-width: 800px;
     margin: 0 auto 30px auto;
     text-align: left;
-    background-color: #161b22; /* Fond sombre de la carte */
-    border: 1px solid #30363d;  /* Fine bordure discrète */
-    padding: 25px;              /* Espace intérieur pour le texte */
-    border-radius: 12px;        /* Coins arrondis harmonieux */
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    padding: 25px;
+    border-radius: 12px;
 }
 
 .detail-info p {
@@ -411,7 +393,7 @@ header h1 {
     font-weight: bold;
 }
 
-/* --- STYLE DE LA SECTION COMMENTAIRES --- */
+/* Commentaires */
 .comments-section {
     max-width: 650px;
     margin: 40px auto 0 auto;
@@ -493,7 +475,6 @@ header h1 {
     font-size: 14px;
 }
 
-/* Bouton de suppression masqué par défaut */
 .comment-item .btn-delete {
     display: none;
     background-color: rgba(248, 81, 73, 0.2);
@@ -505,7 +486,6 @@ header h1 {
     font-size: 12px;
 }
 
-/* Dès que le mode admin est activé sur le body, on affiche les boutons de suppression */
 body.admin-logged-in .comment-item .btn-delete {
     display: inline-block;
 }
@@ -516,7 +496,6 @@ body.admin-logged-in .comment-item .btn-delete {
     align-items: center;
 }
 
-/* Petit lien discret en bas de page pour activer le mode admin */
 .admin-trigger {
     text-align: center;
     margin-top: 30px;
@@ -535,23 +514,21 @@ body.admin-logged-in .comment-item .btn-delete {
     color: #58a6ff;
 }
 
-/* --- NOUVEAU STYLE DE L'EN-TÊTE AVEC COINS ARRONDIS --- */
+/* En-tête bannière */
 .banner-header {
     width: 100%;
     max-height: 350px;
     overflow: hidden;
-    margin-top: 30px;    /* Espace en haut */
-    margin-bottom: 25px; /* Espace en bas */
-    border-bottom: none; /* On enlève la ligne du bas */
-    background-color: transparent; /* Fond transparent */
-    
-    /* --- C'EST ICI QUE ÇA SE PASSE --- */
-    max-width: 1400px;    /* On limite la largeur comme le reste du site */
-    margin-left: auto;    /* On centre le bloc */
+    margin-top: 30px;
+    margin-bottom: 25px;
+    border-bottom: none;
+    background-color: transparent;
+    max-width: 1400px;
+    margin-left: auto;
     margin-right: auto;
-    border-radius: 16px;  /* On arrondit TOUS les coins */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Une ombre pour le faire ressortir */
-    border: 1px solid #30363d; /* Une petite bordure pour le définir */
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid #30363d;
 }
 
 .banner-img {
@@ -559,11 +536,10 @@ body.admin-logged-in .comment-item .btn-delete {
     height: 100%;
     object-fit: cover;
     display: block;
-    /* On enlève l'ancien border-radius ici, il est géré par le header parent */
-    border-radius: 16px; 
+    border-radius: 16px;
 }
 
-/* --- STYLE POUR LA PAGINATION (BOUTONS PAGES 1, 2, 3...) --- */
+/* Pagination */
 .pagination-container {
     display: flex;
     justify-content: center;
@@ -594,7 +570,7 @@ body.admin-logged-in .comment-item .btn-delete {
     color: #ffffff;
 }
 
-/* --- STYLE SECTION DERNIERS COMMENTAIRES (Accueil) --- */
+/* Derniers commentaires */
 .recent-comments-section {
     max-width: 1000px;
     margin: 40px auto 0 auto;
@@ -648,7 +624,7 @@ body.admin-logged-in .comment-item .btn-delete {
     color: #8b949e;
 }
 
-/* --- STYLE DES 3 BOUTONS DE TÉLÉCHARGEMENT --- */
+/* Boutons de téléchargement */
 .download-options {
     display: flex;
     gap: 12px;
@@ -673,34 +649,120 @@ body.admin-logged-in .comment-item .btn-delete {
     background-color: #2ea043;
 }
 
-/* --- STYLE DES BANNIÈRES LATÉRALES (Intégré) --- */
+/* Bouton signaler lien mort */
+.btn-report-dead {
+    background-color: rgba(248, 81, 73, 0.15);
+    color: #f85149;
+    border: 1px solid #f85149;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 5px;
+}
+
+.btn-report-dead:hover {
+    background-color: #f85149;
+    color: white;
+}
+
+/* Modale */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    padding: 25px;
+    border-radius: 12px;
+    width: 350px;
+    text-align: center;
+    color: #e6edf3;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.modal-box h3 {
+    margin-top: 0;
+    color: #58a6ff;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-modal-yes {
+    background-color: #238636;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-modal-yes:hover {
+    background-color: #2ea043;
+}
+
+.btn-modal-no {
+    background-color: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-modal-no:hover {
+    background-color: #30363d;
+}
+
+/* --- MISE EN PAGE GLOBALE EN 3 COLONNES --- */
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+/* Style des bannières latérales gauche et droite */
 .side-banner {
     width: 160px;
-    position: sticky;
-    top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
     flex-shrink: 0;
-    margin-top: 30px;
+    position: sticky;
+    top: 30px;
 }
 
-.side-banner img,
-.side-banner iframe,
-.side-banner div {
+.side-banner img {
     width: 100%;
-    border-radius: 8px;
-    box-sizing: border-box;
+    border-radius: 12px;
     border: 1px solid #30363d;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-.side-banner img:hover {
-    transform: scale(1.02);
-    border-color: #58a6ff;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-@media (max-width: 1350px) {
+/* Sécurité pour les petits écrans */
+@media (max-width: 1200px) {
     .side-banner {
         display: none;
     }

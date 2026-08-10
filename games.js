@@ -4,7 +4,7 @@
 const gamesData = [
     {
         title: "Stalker 2: Heart of Chornobyl",
-        url: "pages jeux/stalker2.html",
+        url: "pages-jeux/stalker2.html",
         image: "assets/stalker2/images/cover.jpg",
         description: "Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie.",
         tag: "Survie / FPS",
@@ -13,7 +13,7 @@ const gamesData = [
     },
     {
         title: "Super Course Auto",
-        url: "pages jeux/supercourse.html",
+        url: "pages-jeux/supercourse.html",
         image: "images/jeu2-cover.jpg",
         description: "Un jeu de course arcade ultra rapide avec des graphismes modernes.",
         tag: "Voiture",
@@ -122,6 +122,20 @@ function filterByStyle(style) {
         currentFilteredGames = [...gamesData];
     } else {
         currentFilteredGames = gamesData.filter(game => game.styleData.includes(style));
+    }
+    currentPage = 1;
+    renderGames();
+}
+
+// FILTRAGE PAR LETTRE (A-Z)
+function filterByLetter(letter) {
+    if (letter === 'all') {
+        currentFilteredGames = [...gamesData];
+    } else {
+        currentFilteredGames = gamesData.filter(game => {
+            let name = game.searchData.toLowerCase();
+            return name.startsWith(letter);
+        });
     }
     currentPage = 1;
     renderGames();

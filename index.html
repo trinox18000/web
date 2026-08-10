@@ -13,16 +13,13 @@
     <!-- CONTENEUR GLOBAL EN 3 COLONNES (Bannière gauche | Site | Bannière droite) -->
     <div class="page-wrapper">
         
-        <!-- BANNIÈRE GAUCHE -->
+        <!-- BANNIÈRE GAUCHE (API Instant Gaming) -->
         <aside class="side-banner">
-            <!-- Remplace le lien et l'image par ta bannière verticale -->
-            <a href="https://www.instant-gaming.com/fr/...?igr=TRINOX18" target="_blank">
-                <img src="assets/logo site/images/ta-banniere-verticale.jpg" alt="Instant Gaming Partenaire">
-            </a>
+            <div id="left-banner" style="width: 100%;"></div>
         </aside>
 
         <!-- CONTENU CENTRAL DE TON SITE -->
-        <div class="site-container" style="flex-grow: 1; max-width: 1400px; margin: 0;">
+        <div class="site-container" style="flex-grow: 1; max-width: 1400px;">
             
             <!-- En-tête -->
             <header class="banner-header">
@@ -46,17 +43,17 @@
 
                 <!-- Liste des Styles -->
                 <div id="styleFilters" class="filter-row">
-                    <button class="filter-btn active" onclick="filterByStyle('all', event)">Tous</button>
-                    <button class="filter-btn" onclick="filterByStyle('survival', event)">Survie</button>
-                    <button class="filter-btn" onclick="filterByStyle('fps', event)">FPS / TPS</button>
-                    <button class="filter-btn" onclick="filterByStyle('action', event)">Action</button>
-                    <button class="filter-btn" onclick="filterByStyle('adventure', event)">Aventure</button>
-                    <button class="filter-btn" onclick="filterByStyle('rpg', event)">RPG</button>
-                    <button class="filter-btn" onclick="filterByStyle('cars', event)">Voiture / Course</button>
-                    <button class="filter-btn" onclick="filterByStyle('simulation', event)">Simulation</button>
-                    <button class="filter-btn" onclick="filterByStyle('strategy', event)">Stratégie</button>
-                    <button class="filter-btn" onclick="filterByStyle('horror', event)">Horreur</button>
-                    <button class="filter-btn" onclick="filterByStyle('roguelike', event)">Rogue-like</button>
+                    <button class="filter-btn active" onclick="handleStyleFilter('all', event)">Tous</button>
+                    <button class="filter-btn" onclick="handleStyleFilter('survival', event)">Survie</button>
+                    <button class="filter-btn" onclick="handleStyleFilter('fps', event)">FPS / TPS</button>
+                    <button class="filter-btn" onclick="handleStyleFilter('action', event)">Action</button>
+                    <button class="filter-btn" onclick="handleStyleFilter('adventure', event)">Aventure</button>
+                    <button class="filter-btn" onclick="handleStyleFilter('rpg', event)">RPG</button>
+                    <button class="filter-btn" onclick="handleStyleFilter('cars', event)">Voiture / Course</button>
+                    <button class="filter-btn" onclick="handleStyleFilter('simulation', event)">Simulation</button>
+                    <button class="filter-btn" onclick="handleStyleFilter('strategy', event)">Stratégie</button>
+                    <button class="filter-btn" onclick="handleStyleFilter('horror', event)">Horreur</button>
+                    <button class="filter-btn" onclick="handleStyleFilter('roguelike', event)">Rogue-like</button>
                 </div>
 
                 <!-- Liste Alphabétique (A-Z) -->
@@ -86,15 +83,22 @@
 
         </div>
 
-        <!-- BANNIÈRE DROITE -->
+        <!-- BANNIÈRE DROITE (API Instant Gaming) -->
         <aside class="side-banner">
-            <!-- Remplace le lien et l'image par ta bannière verticale -->
-            <a href="https://www.instant-gaming.com/fr/...?igr=TRINOX18" target="_blank">
-                <img src="assets/logo site/images/ta-banniere-verticale.jpg" alt="Instant Gaming Partenaire">
-            </a>
+            <div id="right-banner" style="width: 100%;"></div>
         </aside>
 
     </div>
+
+    <!-- CONFIGURATION DES BANNIÈRES INSTANT GAMING -->
+    <script>
+        window.igBannerConfig = {
+            lang: 'fr',
+            igr: 'TRINOX18',
+            banners: ['left-banner', 'right-banner']
+        };
+    </script>
+    <script src="https://www.instant-gaming.com/api/banner/partner/loader.js" defer></script>
 
     <!-- SCRIPT QUI GÉNÈRE LES JEUX EN PREMIER -->
     <script src="games.js"></script>
@@ -107,15 +111,7 @@
             document.getElementById('accueilBtn').classList.add('active');
             document.getElementById('jeuxPcBtn').classList.remove('active');
             document.getElementById('subMenuContainer').style.display = 'none';
-
-            const cards = document.querySelectorAll('#gamesContainer .game-card');
-            cards.forEach((card, index) => {
-                if (index < 5) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
-            });
+            filterByStyle('all');
         }
 
         function showJeuxPC() {
@@ -147,53 +143,20 @@
             }
         }
 
-        function filterByStyle(style, evt) {
-            const cards = document.querySelectorAll('#gamesContainer .game-card');
+        function handleStyleFilter(style, evt) {
             if (evt) {
                 document.querySelectorAll('#styleFilters .filter-btn').forEach(btn => btn.classList.remove('active'));
                 evt.target.classList.add('active');
             }
-
-            cards.forEach(card => {
-                let gameStyles = card.dataset.style;
-                if (style === 'all') {
-                    card.style.display = "flex";
-                } else {
-                    let stylesArray = gameStyles ? gameStyles.split(' ') : [];
-                    if (stylesArray.includes(style)) {
-                        card.style.display = "flex";
-                    } else {
-                        card.style.display = "none";
-                    }
-                }
-            });
+            filterByStyle(style);
         }
 
-        function filterByLetter(letter, evt) {
-            const cards = document.querySelectorAll('#gamesContainer .game-card');
+        function handleLetterFilter(letter, evt) {
             if (evt) {
                 document.querySelectorAll('#alphaFilters .filter-btn').forEach(btn => btn.classList.remove('active'));
                 evt.target.classList.add('active');
             }
-
-            cards.forEach(card => {
-                let name = card.dataset.name.toLowerCase();
-                if (letter === 'all' || name.startsWith(letter)) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        }
-
-        function filterGamesBySearch() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('#gamesContainer .game-card');
-            
-            cards.forEach(card => {
-                let name = card.dataset.name.toLowerCase();
-                card.style.display = name.includes(input) ? "flex" : "none";
-            });
+            filterByLetter(letter);
         }
 
         window.onload = function() {
