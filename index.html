@@ -31,10 +31,20 @@
                 </a>
             </header>
 
-            <!-- MENU PRINCIPAL -->
-            <nav class="main-menu" style="display: flex; gap: 10px; margin-bottom: 20px;">
-                <button class="main-btn active" id="accueilBtn" onclick="showAccueil()">🏠 Accueil</button>
-                <button class="main-btn" id="jeuxPcBtn" onclick="showJeuxPC()">Jeux PC 🎮</button>
+            <!-- MENU PRINCIPAL & BARRE DE RECHERCHE ALIGNÉS -->
+            <nav class="main-menu" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+                <div style="display: flex; gap: 10px;">
+                    <button class="main-btn active" id="accueilBtn" onclick="showAccueil()">🏠 Accueil</button>
+                    <button class="main-btn" id="jeuxPcBtn" onclick="showJeuxPC()">Jeux PC 🎮</button>
+                </div>
+                
+                <!-- Barre de recherche placée à droite -->
+                <div class="search-container" style="margin-bottom: 0; flex-grow: 1; max-width: 350px;">
+                    <div class="search-wrapper">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchInput" placeholder="Rechercher un jeu..." style="padding: 10px 15px 10px 40px; font-size: 14px;">
+                    </div>
+                </div>
             </nav>
 
             <!-- MINI-BANDEAU EN HAUT -->
@@ -43,7 +53,7 @@
                 <button onclick="openAboutModal()">En savoir plus ↓</button>
             </div>
 
-            <!-- SOUS-MENU -->
+            <!-- SOUS-MENU (Sélecteurs de styles/A-Z, affichés uniquement dans Jeux PC) -->
             <div class="sub-menu-container" id="subMenuContainer" style="display: none;">
                 <div class="mode-selectors">
                     <button class="mode-btn active" onclick="setBrowseMode('style')">Par Style</button>
@@ -68,14 +78,10 @@
                 <!-- Liste Alphabétique (A-Z) -->
                 <div id="alphaFilters" class="filter-row" style="display: none; flex-wrap: wrap;">
                     <button class="filter-btn active" onclick="handleLetterFilter('all', event)">Tous</button>
-                    <script>
-                        const letters = "abcdefghijklmnopqrstuvwxyz".split("");
-                        letters.forEach(l => {
-                            document.write(`<button class="filter-btn" onclick="handleLetterFilter('${l}', event)">${l.toUpperCase()}</button>`);
-                        });
-                    </script>
+                    <!-- Les boutons A-Z seront injectés ici automatiquement par script.js -->
+                    <div id="alphaFiltersList" style="display: contents;"></div>
                 </div>
-            </div>
+            </div> <!-- <-- BALISE DIV DE FERMETURE AJOUTÉE ICI -->
 
             <!-- CONTENU : LISTE DES JEUX -->
             <main>
@@ -115,7 +121,8 @@
             <p>
                 Pour <strong class="key-highlight">garantir votre sécurité</strong>, nous vous fournissons directement les liens finaux des 
                 hébergeurs afin de vous éviter les sites tiers remplis de publicités malveillantes ou de virus. 
-                <br><strong class="key-highlight">Aucun fichier n'est stocké ou hébergé sur nos serveurs</strong>, nous ne faisons que partager des liens externes existants.
+                <br><strong class="key-highlight">Aucun fichier n'est stocké ou hébergé sur nos serveurs</strong>, nous ne faisons que partager des liens externes existants 
+                et <strong>nous ne sommes en aucun cas responsables du contenu présent sur ces hébergeurs tiers</strong>.
             </p>
             
             <p class="highlight-text">

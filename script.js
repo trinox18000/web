@@ -90,6 +90,17 @@ document.addEventListener("DOMContentLoaded", function() {
     
     emailjs.init({ publicKey: "_KJIQgzKnZEuNb72R" });
 
+    // Génération automatique des boutons A-Z pour éviter le code dans le HTML
+    const alphaContainer = document.getElementById("alphaFiltersList");
+    if (alphaContainer) {
+        const letters = "abcdefghijklmnopqrstuvwxyz".split("");
+        let buttonsHTML = "";
+        letters.forEach(l => {
+            buttonsHTML += `<button class="filter-btn" onclick="handleLetterFilter('${l}', event)">${l.toUpperCase()}</button>`;
+        });
+        alphaContainer.innerHTML = buttonsHTML;
+    }
+
     const adminTriggerContainer = document.createElement('div');
     adminTriggerContainer.classList.add('admin-trigger');
     adminTriggerContainer.innerHTML = `<button onclick="toggleAdminMode()">🔐 Connexion Admin</button>`;
