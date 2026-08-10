@@ -528,24 +528,26 @@ body.admin-logged-in .comment-item .btn-delete {
     color: #58a6ff;
 }
 
-/* En-tête bannière corrigé (sans espace vide) */
+/* En-tête bannière ajusté pour afficher l'image complète sans la rogner */
 .banner-header {
     width: 100%;
     max-width: 1400px;
-    height: 220px;
+    height: auto; /* Laisse la hauteur s'adapter automatiquement selon l'image */
     margin: 30px auto 25px auto;
     border-radius: 16px;
     overflow: hidden;
     background-color: #161b22;
     border: 1px solid #30363d;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .banner-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    height: auto;
+    object-fit: contain; /* Affiche toute l'image en entier sans la couper */
     display: block;
     border-radius: 16px;
 }
