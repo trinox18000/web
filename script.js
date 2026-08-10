@@ -5,7 +5,7 @@
     link.rel = 'icon';
     // Détecte si on est dans un sous-dossier (comme pages-jeux/) ou à la racine
     let isSubFolder = window.location.pathname.includes('/pages-jeux/');
-    link.href = isSubFolder ? '../assets/logo site/images/logo-trinox.png' : 'assets/logo site/images/logo-trinox.png';
+    link.href = isSubFolder ? '../assets/logo site/images/favicon.png' : 'assets/logo site/images/favicon.png';
     
     document.getElementsByTagName('head')[0].appendChild(link);
 })();
