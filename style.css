@@ -952,4 +952,17 @@ body.admin-logged-in .comment-item .btn-delete {
     .game-details-page h2 {
         font-size: 22px !important;
     }
+	
+	/* Fait défiler proprement les filtres sur mobile sans qu'ils se superposent */
+    .filter-row {
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        width: 100% !important;
+        padding: 10px 5px !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-btn {
+        flex-shrink: 0 !important;
+    }
 }
