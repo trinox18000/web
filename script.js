@@ -1,3 +1,15 @@
+// Injection automatique du Favicon sur toutes les pages
+(function() {
+    let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/png';
+    link.rel = 'icon';
+    // Détecte si on est dans un sous-dossier (comme pages-jeux/) ou à la racine
+    let isSubFolder = window.location.pathname.includes('/pages-jeux/');
+    link.href = isSubFolder ? '../assets/logo site/images/logo-trinox.png' : 'assets/logo site/images/logo-trinox.png';
+    
+    document.getElementsByTagName('head')[0].appendChild(link);
+})();
+
 // Mot de passe admin
 const ADMIN_PASSWORD = "MonMotDePasseSecret"; 
 let isAdminMode = false;
