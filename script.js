@@ -17,6 +17,17 @@ document.addEventListener("DOMContentLoaded", function() {
     loadGameComments(); // Charge uniquement les commentaires de ce jeu
 });
 
+// Fonction pour faire défiler les carrousels (images et vidéos)
+function scrollCarousel(containerId, distance) {
+    const container = document.getElementById(containerId);
+    if (container) {
+        container.scrollBy({
+            left: distance,
+            behavior: 'smooth'
+        });
+    }
+}
+
 function generateCaptcha() {
     const num1 = Math.floor(Math.random() * 10) + 1;
     const num2 = Math.floor(Math.random() * 10) + 1;
