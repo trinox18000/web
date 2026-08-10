@@ -168,13 +168,8 @@ function reportDeadLink(gameName) {
     const messageEl = document.getElementById('modalMessage');
     const buttonsDiv = modal.querySelector('.modal-buttons');
     
-    // 1. Remet l'affichage initial complet au cas où
     messageEl.textContent = `Quel hébergeur pose problème pour ${gameName} ?`;
     if (buttonsDiv) buttonsDiv.style.display = 'flex';
-    
-    // Retrouve la zone des hébergeurs (les inputs radio) pour pouvoir les cacher après
-    const radioContainer = modalBox.querySelector('div:not(.modal-buttons)') || modalBox.querySelector('form') || modalBox;
-    // Si tu as une classe spécifique pour tes radios, tu peux l'isoler, sinon on cache les éléments intermédiaires
     
     modal.style.display = 'flex';
 
@@ -184,7 +179,6 @@ function reportDeadLink(gameName) {
     
     document.getElementById('modalNoBtn').onclick = () => {
         modal.style.display = 'none';
-        // Remet tout en place pour la prochaine fois
         if (buttonsDiv) buttonsDiv.style.display = 'flex';
     };
     
@@ -192,13 +186,9 @@ function reportDeadLink(gameName) {
         const selectedHost = document.querySelector('input[name="deadHost"]:checked');
         const hostName = selectedHost ? selectedHost.value : "Inconnu";
         
-        // Change le texte du message
         messageEl.textContent = "⏳ Envoi en cours...";
-        
-        // Cache les boutons de choix (Oui / Non) et les boutons radio pour ne plus voir les hébergeurs
         if (buttonsDiv) buttonsDiv.style.display = 'none';
         
-        // Masque tous les boutons radio s'ils traînent
         const allRadios = modalBox.querySelectorAll('input[type="radio"], label');
         allRadios.forEach(el => el.style.display = 'none');
 
@@ -210,7 +200,6 @@ function reportDeadLink(gameName) {
             
             setTimeout(() => {
                 modal.style.display = 'none';
-                // Remet tout d'aplomb pour la prochaine ouverture
                 if (buttonsDiv) buttonsDiv.style.display = 'flex';
                 allRadios.forEach(el => el.style.display = '');
             }, 2000);

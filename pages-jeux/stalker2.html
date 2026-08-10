@@ -7,25 +7,17 @@
     <!-- Ajout de ../ pour le style CSS -->
     <link rel="stylesheet" href="../style.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-    <!-- CONFIGURATION OFFICIELLE INSTANT GAMING -->
-    <script>
-        window.igBannerConfig = {
-            lang: 'fr',
-            igr: 'TRINOX18',
-            banners: ['left-banner', 'right-banner']
-        };
-    </script>
-    <script src="https://www.instant-gaming.com/api/banner/partner/loader.js" defer></script>
 </head>
 <body>
 
     <!-- CONTENEUR GLOBAL EN 3 COLONNES (Bannière gauche | Site | Bannière droite) -->
     <div class="page-wrapper">
         
-        <!-- BANNIÈRE GAUCHE -->
+        <!-- BANNIÈRE GAUCHE (Image fixe affiliation) -->
         <aside class="side-banner">
-            <div id="left-banner"></div>
+            <a href="https://www.instant-gaming.com/fr/?igr=TRINOX18" target="_blank" class="my-banner">
+                <img src="../assets/logo site/images/ma-banniere-perso.jpg" alt="Instant Gaming - Trinox18">
+            </a>
         </aside>
 
         <!-- CONTENU CENTRAL DE TON SITE -->
@@ -128,7 +120,7 @@
                             <input type="text" id="commentAuthor" placeholder="Votre pseudo" required>
                             <textarea id="commentText" placeholder="Écrire un commentaire..." rows="3" required></textarea>
                             <div class="form-group">
-                                <label for="captcha">Combien font<span id="captchaQuestion"></span> ?</label>
+                                <label for="captcha">Combien font <span id="captchaQuestion"></span> ?</label>
                                 <input type="number" id="captcha" placeholder="Réponse" required>
                             </div>
                             <button type="submit" class="btn-comment">Publier</button>
@@ -144,9 +136,11 @@
             </main>
         </div>
 
-        <!-- BANNIÈRE DROITE -->
+        <!-- BANNIÈRE DROITE (Image fixe affiliation) -->
         <aside class="side-banner">
-            <div id="right-banner"></div>
+            <a href="https://www.instant-gaming.com/fr/?igr=TRINOX18" target="_blank" class="my-banner">
+                <img src="../assets/logo site/images/ma-banniere-perso.jpg" alt="Instant Gaming - Trinox18">
+            </a>
         </aside>
 
     </div>
