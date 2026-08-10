@@ -532,7 +532,7 @@ body.admin-logged-in .comment-item .btn-delete {
 .banner-header {
     width: 100%;
     max-width: 1400px;
-    height: 200px; /* On ajuste la hauteur pour mieux cadrer */
+    height: 244px; /* On réduit la hauteur de la boîte pour qu'elle colle parfaitement à l'image */
     margin: 30px auto 25px auto;
     border-radius: 16px;
     overflow: hidden;
@@ -544,7 +544,8 @@ body.admin-logged-in .comment-item .btn-delete {
 .banner-img {
     width: 100%;
     height: 100%;
-    object-fit: fill; /* Étire l'image juste ce qu'il faut pour qu'elle rentre entièrement sans couper les bords */
+    object-fit: cover; 
+    object-position: center 30%; /* Décale légèrement l'image vers le haut pour faire remonter le logo "GAMES" et supprimer le vide du bas */
     display: block;
     border-radius: 16px;
 }
