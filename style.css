@@ -90,20 +90,22 @@ header h1 {
     margin-bottom: 15px;
 }
 
-/* CORRECTION CLÉE : Permet aux styles de passer à la ligne proprement au lieu de se chevaucher */
+/* MODIFICATION : Aligne les styles en multi-lignes centrées exactement comme l'alphabet */
 .filter-row {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
     padding: 10px 15px;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .filter-btn {
     background-color: #21262d;
     color: #c9d1d9;
     border: 1px solid #30363d;
-    padding: 8px 12px;
+    padding: 8px 14px;
     border-radius: 20px;
     cursor: pointer;
     white-space: nowrap;
