@@ -15,7 +15,7 @@ const gamesData = [
         title: "Beast of Reincarnation",
         url: "pages-jeux/Beast-of-Reincarnation.html",
         image: "assets/Beast-of-Reincarnation/images/cover.jpg",
-        description: "description: Explorez un monde post-apocalyptique à travers un voyage aux côtés d'une paria et de son chien, combinant tour par tour et temps réel.",
+        description: "Explorez un monde post-apocalyptique à travers un voyage aux côtés d'une paria et de son chien, combinant tour par tour et temps réel.",
         tag: "Action / Aventure / RPG",
         styleData: "action aventure rpg",
         searchData: "Beast of Reincarnation"
