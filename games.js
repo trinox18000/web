@@ -2,6 +2,17 @@
 // LISTE DES JEUX (AJOUTE LES NOUVEAUX EN HAUT)
 // ==========================================
 const gamesData = [
+
+	{
+        title: "Forza Horizon 6",
+        url: "pages-jeux/Forza-Horizon-6.html",
+        image: "assets/Forza-Horizon-6/images/cover.jpg",
+        description: "Partez à la découverte des paysages spectaculaires du Japon au volant de plus de 550 véhicules de légende dans un immense monde ouvert.",
+        tag: "Voiture / Course / Simulation",
+        styleData: "simulation cars",
+        searchData: "Forza Horizon 6"
+    },
+	
 	{
         title: "Dwarf Eats Mountain",
         url: "pages-jeux/Dwarf-Eats-Mountain.html",
