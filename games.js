@@ -2,7 +2,6 @@
 // LISTE DES JEUX (AJOUTE LES NOUVEAUX EN HAUT)
 // ==========================================
 const gamesData = [
-
 	{
         title: "Forza Horizon 6",
         url: "pages-jeux/Forza-Horizon-6.html",
@@ -12,7 +11,6 @@ const gamesData = [
         styleData: "simulation cars",
         searchData: "Forza Horizon 6"
     },
-	
 	{
         title: "Dwarf Eats Mountain",
         url: "pages-jeux/Dwarf-Eats-Mountain.html",
@@ -22,7 +20,6 @@ const gamesData = [
         styleData: "strategy roguelike",
         searchData: "Dwarf Eats Mountain"
     },
-
 	{
         title: "Pax Autocratica",
         url: "pages-jeux/Pax-Autocratica.html",
@@ -32,7 +29,6 @@ const gamesData = [
         styleData: "simulation strategy fps roguelike",
         searchData: "Pax Autocratica"
     },
-
 	{
         title: "Exo Rally Championship",
         url: "pages-jeux/Exo-Rally-Championship.html",
@@ -94,10 +90,21 @@ function renderGames() {
     const container = document.getElementById('gamesContainer');
     if (!container) return;
 
-    // Calcul des jeux à afficher sur la page actuelle
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    const gamesToShow = currentFilteredGames.slice(startIndex, endIndex);
+    // Détecte si on est sur la page d'accueil (si le sous-menu des filtres est masqué)
+    const subMenu = document.getElementById('subMenuContainer');
+    const isAccueil = subMenu && subMenu.style.display === 'none';
+
+    let gamesToShow;
+
+    if (isAccueil) {
+        // SUR L'ACCUEIL : Limite exacte de 8 jeux maximum (le 9ème en haut chasse le dernier)
+        gamesToShow = currentFilteredGames.slice(0, 8);
+    } else {
+        // SUR JEUX PC / FILTRES : Pagination normale de 12 jeux par page
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        gamesToShow = currentFilteredGames.slice(startIndex, endIndex);
+    }
 
     if (gamesToShow.length === 0) {
         container.innerHTML = `<p style="color: #8b949e; grid-column: 1/-1; text-align: center; padding: 40px;">Aucun jeu trouvé.</p>`;
@@ -114,7 +121,13 @@ function renderGames() {
         `).join('');
     }
 
-    renderPaginationControls();
+    // Gestion de l'affichage des boutons de pagination (masqués sur l'accueil)
+    if (!isAccueil) {
+        renderPaginationControls();
+    } else {
+        const paginationContainer = document.getElementById('paginationControls');
+        if (paginationContainer) paginationContainer.innerHTML = '';
+    }
 }
 
 // CRÉATION DES BOUTONS DE PAGINATION EN BAS DE PAGE
