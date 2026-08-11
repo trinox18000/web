@@ -4,10 +4,20 @@
 const gamesData = [
 
 	{
+        title: "Pax Autocratica",
+        url: "pages-jeux/Pax-Autocratica.html",
+        image: "assets/Pax-Autocratica/images/cover.jpg",
+        description: "Simulateur de colonie totalitaire et FPS roguelite. Gérez votre base, menez vos troupes au combat, convertissez ou sacrifiez vos ennemis.",
+        tag: "Simulation / Stratégie / FPS / TPS / Rogue-like",
+        styleData: "simulation strategy fps roguelike",
+        searchData: "Pax Autocratica"
+    },
+
+	{
         title: "Exo Rally Championship",
         url: "pages-jeux/Exo-Rally-Championship.html",
         image: "assets/Exo-Rally-Championship/images/cover.jpg",
-        description: "Simulateur de rallye tout-terrain extrême sur des planètes extraterrestres avec physique réaliste, propulseurs RCS et environnements générés de manière procédurale.",
+        description: "Simulateur de rallye tout-terrain extrême sur planètes extraterrestres avec physique réaliste et environnements procéduraux.",
         tag: "Voiture / Course / Simulation",
         styleData: "simulation cars",
         searchData: "Exo Rally Championship"
@@ -16,7 +26,7 @@ const gamesData = [
         title: "Stalker 2 : Heart of Chornobyl",
         url: "pages-jeux/stalker2.html",
         image: "assets/stalker2/images/cover.jpg",
-        description: "Plongez dans la Zone d'exclusion de Tchernobyl dans ce jeu de tir et de survie.",
+        description: "Plongez au cœur de la Zone de Tchernobyl dans ce FPS de survie post-apocalyptique. Affrontez mutants et déjouez des anomalies.",
         tag: "Survie / FPS / Horreur",
         styleData: "survival fps horror",
         searchData: "stalker 2 heart of chornobyl"
@@ -25,7 +35,7 @@ const gamesData = [
         title: "Beast of Reincarnation",
         url: "pages-jeux/Beast-of-Reincarnation.html",
         image: "assets/Beast-of-Reincarnation/images/cover.jpg",
-        description: "Explorez un monde post-apocalyptique à travers un voyage aux côtés d'une paria et de son chien, combinant tour par tour et temps réel.",
+        description: "Explorez un monde post-apocalyptique aux côtés d'une paria et de son chien, combinant habilement combat tour par tour et temps réel.",
         tag: "Action / Aventure / RPG",
         styleData: "action aventure rpg",
         searchData: "Beast of Reincarnation"

@@ -860,7 +860,6 @@ body.admin-logged-in .comment-item .btn-delete {
     border: 1px solid #30363d;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
     cursor: default;
-    pointer-events: none;
 }
 
 /* Boutons de navigation et de fermeture dans la Lightbox */

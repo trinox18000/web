@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pax Autocratica</title>
+    <!-- Ajout de ../ pour le style CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+    <!-- CONTENEUR GLOBAL EN 3 COLONNES -->
+    <div class="page-wrapper">
+        
+        <!-- BANNIÈRE GAUCHE -->
+        <aside class="side-banner">
+            <a href="https://www.instant-gaming.com/fr/?igr=TRINOX18" target="_blank" class="my-banner">
+                <img src="../assets/logo site/images/ma-banniere-perso.jpg" alt="Instant Gaming - Trinox18">
+            </a>
+        </aside>
+
+        <!-- CONTENU CENTRAL -->
+        <div class="site-container" style="flex-grow: 1; max-width: 1400px; margin: 0;">
+            <main>
+                <section class="game-details-page" style="background-image: linear-gradient(rgba(13, 17, 23, 0.60), rgba(13, 17, 23, 0.60)), url('../assets/Pax-Autocratica/images/fond-cover.jpg');">
+                    <a href="../index.html" class="back-btn">← Retour</a>
+                    
+                    <!-- 1. TITRE DU JEU -->
+                    <h2>Pax Autocratica</h2>
+                    
+                    <!-- 2. LA DESCRIPTION -->
+                    <div class="detail-info" style="margin-bottom: 30px;">
+                        <h3>Description :</h3>
+                        <p>Établissez une colonie totalitaire et menez vos troupes dans des champs de bataille FPS roguelite remplis de projectiles, lasers et véhicules. Capturez vos ennemis, convertissez-les en fidèles ou sacrifiez-les pour nourrir les forts. Exercez un pouvoir absolu et pliez chaque vie à votre volonté.</p>
+                    </div>
+
+                    <!-- 3. LES CAPTURES D'ÉCRAN -->
+                    <div class="media-section">
+                        <h3>Captures d'écran</h3>
+                        <div class="carousel-container">
+                            <button class="carousel-btn prev-btn" onclick="scrollCarousel('imagesScroll', -600)">❮</button>
+                            <div class="carousel-track" id="imagesScroll">
+                                <!-- MODIFIE LES CHEMINS DES IMAGES ICI -->
+                                <img src="../assets/Pax-Autocratica/images/cover.jpg" alt="Cover">
+                                <img src="../assets/Pax-Autocratica/images/screenshot-1.jpg" alt="Screenshot 1">
+                                <img src="../assets/Pax-Autocratica/images/screenshot-2.jpg" alt="Screenshot 2">
+                            </div>
+                            <button class="carousel-btn next-btn" onclick="scrollCarousel('imagesScroll', 600)">❯</button>
+                        </div>
+                    </div>
+
+                    <!-- 4. LES VIDÉOS -->
+					<div class="media-section">
+						<h3>Vidéos</h3>
+						<div class="carousel-container">
+							<button class="carousel-btn prev-btn" onclick="scrollCarousel('videosScroll', -600)">❮</button>
+							
+							<!-- Track qui contient les items vidéo -->
+							<div class="carousel-track" id="videosScroll">
+								
+								<!-- Exemple 1 : Vidéo AVEC sous-titres (le fichier .vtt) -->
+								<div class="carousel-video-item">
+									<video controls>
+										<!-- Change le chemin ici -->
+										<source src="../assets/Pax-Autocratica/videos/trailer.mp4" type="video/mp4">
+										<!-- Change le chemin du fichier .vtt ici -->
+										<track src="../assets/Pax-Autocratica/videos/Pax-Autocratica-traileur.vtt" kind="subtitles" srclang="fr" label="Français" default>
+									</video>
+								</div>
+
+								<!-- Exemple 2 : Vidéo SANS sous-titre -->
+								<div class="carousel-video-item">
+									<video controls>
+										<!-- Change le chemin ici -->
+										<source src="../assets/Pax-Autocratica/videos/gameplay.mp4" type="video/mp4">
+										<track src="../assets/Pax-Autocratica/videos/Pax-Autocratica-gameplay.vtt" kind="subtitles" srclang="fr" label="Français" default>
+										<!-- S'il n'y a pas de sous-titres, ne mets pas de balise <track> ici -->
+									</video>
+								</div>
+
+								<!-- Tu peux rajouter autant de blocs <div class="carousel-video-item"> que tu veux -->
+
+							</div>
+							
+							<button class="carousel-btn next-btn" onclick="scrollCarousel('videosScroll', 600)">❯</button>
+						</div>
+					</div>
+
+                    <!-- 5. CONFIG PC, ACHAT & TÉLÉCHARGEMENT -->
+                    <div class="system-check-box">
+                        <div class="system-check-inner">
+                            <p>💡 Tu veux savoir si le jeu tourne sur ton PC ?</p>
+                            <!-- MODIFIE LE LIEN SYSTEMREQS AVEC LE NOM DU JEU -->
+                            <a href="https://www.systemrequirementslab.com/cyri/requirements/pax-autocratica/30204" target="_blank" class="btn-system">Vérifier ma configuration sur Systemrequirementslab</a>
+                        </div>
+
+                        <!-- Taille du jeu -->
+                        <p style="margin: 15px 0 5px 0; color: #fff; font-weight: bold;">📦 Taille du jeu : <span style="color: #8b949e; font-weight: normal;">~40 Go</span></p>
+
+                        <!-- LIENS D'ACHAT (Steam / Instant Gaming) -->
+                        <h3 style="margin-bottom: 5px; margin-top: 20px;">Acheter le jeu / Soutenir le site :</h3>
+                        <div class="download-options">
+                            <!-- Bouton Steam -->
+                            <a href="https://store.steampowered.com/app/1067360/Pax_Autocratica/" target="_blank" class="btn-download" style="background-color: #171a21; display: inline-flex; align-items: center; justify-content: center; gap: 10px;">
+                                <img src="../assets/logo site/images/steam-logo.png" alt="Steam" style="height: 30px; width: auto;">
+                                (Officiel)
+                            </a>
+                            
+                            <!-- Bouton Instant Gaming avec ton lien affilié TRINOX18 -->
+                            <a href="https://www.instant-gaming.com/fr/23324-acheter-pax-autocratica-pc-steam/?igr=TRINOX18" target="_blank" class="btn-download" style="background-color: #171a21; display: inline-flex; align-items: center; justify-content: center; gap: 10px;">
+                                <img src="../assets/logo site/images/instant-gaming-logo.png" alt="Instant Gaming" style="height: 30px; width: auto;">
+                                (Partenaire)
+                            </a>
+                        </div>
+
+                        <!-- LIENS DE TÉLÉCHARGEMENT -->
+                        <h3 style="margin-bottom: 5px; margin-top: 20px;">Télécharger le jeu :</h3>
+                        <div class="download-options">
+                            <!-- MODIFIE TES LIENS DE TÉLÉCHARGEMENT ICI -->
+                            <a href="https://1fichier.com/?c9nrxzfz6weryxfvbbxl" target="_blank" class="btn-download">1FICHIER</a>
+                            <a href="https://gofile.io/d/oRBX3Q" target="_blank" class="btn-download">GOFILE</a>
+                            <a href="https://vikingfile.com/f/6N6VJrwdwq" target="_blank" class="btn-download">VIKINGFILE</a>
+                        </div>
+
+                        <!-- Bouton Lien Mort (Remplace juste "Nom du Jeu" dans la fonction) -->
+                        <button onclick="reportDeadLink('Pax Autocratica')" class="btn-report-dead">
+                            ⚠️ Signaler un lien mort
+                        </button>
+                    </div>
+
+                    <!-- 6. SECTION COMMENTAIRES -->
+                    <div class="comments-section">
+                        <h3>Mets un commentaire</h3>
+                        
+                        <!-- MODIFIE LE TITRE ET LE CHEMIN DE LA PAGE DANS LES PARAMÈTRES DE addComment -->
+                        <form class="comment-form" onsubmit="addComment(event, 'Pax Autocratica', 'pages-jeux/Pax-Autocratica.html')">
+                            <input type="text" id="commentAuthor" placeholder="Votre pseudo" required>
+                            <textarea id="commentText" placeholder="Écrire un commentaire..." rows="3" required></textarea>
+                            <div class="form-group">
+                                <label for="captcha">Combien font <span id="captchaQuestion"></span> ?</label>
+                                <input type="number" id="captcha" placeholder="Réponse" required>
+                            </div>
+                            <button type="submit" class="btn-comment">Publier</button>
+                        </form>
+
+                        <div id="commentsList" class="comments-list"></div>
+                    </div>
+
+                </section>
+            </main>
+        </div>
+
+        <!-- BANNIÈRE DROITE -->
+        <aside class="side-banner">
+            <a href="https://www.instant-gaming.com/fr/?igr=TRINOX18" target="_blank" class="my-banner">
+                <img src="../assets/logo site/images/ma-banniere-perso.jpg" alt="Instant Gaming - Trinox18">
+            </a>
+        </aside>
+
+    </div>
+
+    <!-- Modale pour les liens morts (Ne pas modifier) -->
+    <div id="customConfirmModal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <h3>Signaler un lien mort</h3>
+            <p id="modalMessage">Quel hébergeur pose problème ?</p>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin: 15px 0; text-align: left; padding-left: 20px;">
+                <label style="cursor: pointer;"><input type="radio" name="deadHost" value="1FICHIER" checked> 1FICHIER</label>
+                <label style="cursor: pointer;"><input type="radio" name="deadHost" value="GOFILE"> GOFILE</label>
+                <label style="cursor: pointer;"><input type="radio" name="deadHost" value="VIKINGFILE"> VIKINGFILE</label>
+            </div>
+            <div class="modal-buttons">
+                <button id="modalYesBtn" class="btn-modal-yes">Oui</button>
+                <button id="modalNoBtn" class="btn-modal-no">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
