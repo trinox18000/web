@@ -2,6 +2,15 @@
 // LISTE DES JEUX (AJOUTE LES NOUVEAUX EN HAUT)
 // ==========================================
 const gamesData = [
+	{
+        title: "Dwarf Eats Mountain",
+        url: "pages-jeux/Dwarf-Eats-Mountain.html",
+        image: "assets/Dwarf-Eats-Mountain/images/cover.jpg",
+        description: "Un jeu incrémental stratégique où vous dirigez des nains pour miner des montagnes, récolter des ressources et améliorer vos machines.",
+        tag: "Stratégie / Rogue-like",
+        styleData: "strategy roguelike",
+        searchData: "Dwarf Eats Mountain"
+    },
 
 	{
         title: "Pax Autocratica",
