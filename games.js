@@ -3,6 +3,15 @@
 // ==========================================
 const gamesData = [
 	{
+        title: "Mortal Shell II",
+        url: "pages-jeux/Mortal-Shell-II.html",
+        image: "assets/Mortal-Shell-II/images/cover.jpg",
+        description: "Mortal Shell II : Un action-RPG sombre et exigeant. Incarnez de puissants guerriers pour terrasser des divinités dans un vaste monde impitoyable.",
+        tag: "Aventure / RPG / Horreur",
+        styleData: "rpg horror adventure",
+        searchData: "Mortal Shell II"
+    },
+	{
         title: "Forza Horizon 6",
         url: "pages-jeux/Forza-Horizon-6.html",
         image: "assets/Forza-Horizon-6/images/cover.jpg",
